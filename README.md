@@ -42,7 +42,7 @@
 │       ├───node_modules
 │       │   └───aframe-gltf-part-component
 │       │       ├───dist
-│       │       └───tests
+│       │       └───tests 
 │       └───onLoadJS
 ├───5_staircases
 │   ├───css
