@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>2D Text visualiser</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://fonts.googleapis.com/css?family=Atomic+Age|Cinzel|Coming+Soon|
+		Cormorant+SC|Cutive+Mono|Josefin+Sans:100|Julius+Sans+One|Mountains+of+Christmas|
+		Nixie+One|Nosifer|Playfair+Display+SC|Suez+One|Quicksand|Space+Mono|Rubik+Mono+One|Vast+Shadow"
+		 rel="stylesheet">
+		<!-- #region COMMUNITY SCRIPTS-->
+		<script src="js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+		<script src="js/aframeCommunity/aframe-event-set-component.min.js"></script>
+		<script src="js/aframeCommunity/aframe-animation-component.min.js"></script>
+		<script src="js/aframeCommunity/aframe-extras.min.js"></script>
+		<!--endregion-->
+		<!-- #region MY SCRIPTS -->
+		<script src="js/myComponents/myIntersect.js"></script>
+		<script src="js/onLoadJS/onload2dText.js"></script>
+		<script src="js/onLoadJS/player.js"></script>
+		<script src="/bulma/bulma-slider-master/dist/js/bulma-slider.min.js"></script>
+		<!-- endregion -->
+		<link rel="stylesheet" type="text/css" href="/bulma/bulma-slider-master/dist/css/bulma-slider.min.css">
+		<link rel="stylesheet" type="text/css" href="css/COLORgrid.css">
+	</head>
+
+	<body>
+		<!-- ______________________________________O N E -->
+		<div class="grid-container">
+			<!-- #region C A N V A S E S -->
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas2" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<!-- endregion -->
+			<a href="../index.html"><div class="header">Javascript 3D Experiments</div></a>
+			<!-- #region N A V B A R -->
+			<div class="nav">
+				<ul>
+					<a href="../index.html">
+						<li class="buttonS">Home</li>
+					</a>
+					<a href="../5_staircases/StaircasesPly.html">
+						<li class="buttonS">1. &nbspStaircases and Collision</li>
+					</a>
+					<a href="../6_light/Light.html">
+						<li class="buttonS">2.&nbsp Learn with Light</li>
+					</a>
+					<a href="../7_threeExperiment/threeJsExperiment.html">
+						<li class="buttonS">3. &nbspTHREE js experiment</li>
+					</a>
+					<a href="../1_panesConcept/panesConcept.html">
+						<li class="buttonS">4. &nbspPanes Concept</li>
+					</a>
+					<a href="../2_extrudedText/extrudedText.html">
+						<li class="buttonS">5. &nbspExtruded Text</li>
+					</a>
+					<a href="experimentalHub.html">
+						<li class="current">6. &nbspExperimental Hub</li>
+					</a>
+					<a href="../4_mainTextPlanes/mainTextPlanes.html">
+						<li class="buttonS">7. &nbspMain Text Panes</li>
+					</a>
+				</ul>
+			</div>
+			<!-- endregion -->
+			<!-- #region P A N E   W O R L D   C O N T R O L  -->
+			<div class="ctrlWhite">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderWhite">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderYWhite">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZWhite">
+				<input type="range" min="0" max="20" value="0" class="slider" id="ctrlWSliderScaleWhite">
+			</div>
+			<div class="ctrlGreen">
+				<input type="range" min="-2000" max="2000" value="0" class="slider" id="ctrlWSlider">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderY">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZ">
+				<input type="range" min="1" max="20" value="0" class="slider" id="ctrlWSliderScale">
+			</div>
+			<div class="ctrlPink">
+				<input type="range" min="-2000" max="2000" value="0" class="slider" id="ctrlWSliderPink">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderYPink">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZPink">
+				<input type="range" min="1" max="20" value="0" class="slider" id="ctrlWSliderScalePink">
+			</div>
+			<div class="ctrlYellow">
+				<input type="range" min="-2000" max="2000" value="0" class="slider" id="ctrlWSliderYellow">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderYYellow">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZYellow">
+				<input type="range" min="1" max="20" value="0" class="slider" id="ctrlWSliderScaleYellow">
+			</div>
+			<div class="ctrlBlue">
+				<input type="range" min="-2000" max="2000" value="0" class="slider" id="ctrlWSliderBlue">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderYBlue">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZBlue">
+				<input type="range" min="1" max="20" value="0" class="slider" id="ctrlWSliderScaleBlue">
+			</div>
+			<!-- endregion-->
+			<!-- #region F O R M -->
+			<div class="textPlane1">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<div class="textPlane2">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput2" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<div class="textPlane3">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput3" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<div class="textPlane4">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput4" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<div class="textPlane5">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput5" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<!-- endregion-->
+			<div class="VR">
+				<a-scene id="scene" embedded physics="debug: true" light="defaultLightsEnabled: false" antialias="true">
+					<!-- #region A S S E T S      -->
+					<a-assets>
+						<!-- <sound id="NINA" src="NINA - Your Truth.wav" preload="auto"></sound>
+        <sound id="eight" src="eight.wav" preload="auto"></sound> -->
+						<a-mixin id="red" material="color: red"></a-mixin>
+						<canvas id="myCanvas" crossorigin="anonymous"></canvas>
+						<canvas id="myCanvas2" crossorigin="anonymous"></canvas>
+					</a-assets>
+					<!-- endregion -->
+					<!-- #region W O R L D        -->
+					<!--SKY________________________________________________________________-->
+					<a-sky src="#myCanvas" material="repeat: 1 1" rotation="0 125 0"></a-sky>
+					<!-- <a-sphere material="wireframe: true" geometry="radius: 4000"></a-sphere> -->
+					<!-- GROUND___________________________________________________________ -->
+					<a-plane visible="true" position="0 -0.181 0 " rotation="-90 0 0" width="500" height="500" shadow="recieve: true; cast: true"
+					 static-body material="src: #grid; repeat: 1000 1000"></a-plane>
+					<!-- endregion basic world -->
+					<!-- #region P L A Y E R      -->
+					<!-- ________________________________________________________ CAMERA -->
+					<a-entity id="player" camera="fov: 90" look-controls="pointerLockEnabled: true" wasd-controls="acceleration: 200; fly: true;"
+						position="0 1.6 0" rotation="0 45 0">
+						<!-- _______________________________________________SECOND RAYCASTER -->
+						<a-entity id="raycaster2" raycaster="showLine: true; far: 100030; near: 10 " line="color: red; opacity: 1" lazer
+						 position="0 -1 0"></a-entity>
+						<!-- ________________________________________________________ CUSROR -->
+						<a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.1" geometry="primitive: ring" scale="0.001 0.001 0.001"
+						 material="color: white; shader: flat"></a-entity>
+						<!-- ___________________________________________________________ ARM -->
+						<a-box scale="0.5014227981791224 0.133 4.842047220426898" color="red" static-body="sphereRadius:NaN"
+						 position="-0.69297045021367 -0.35 -2.1901775419154057"></a-box>
+						<a-text id="curvedHUD" height="3" transparent="true" alpha-test="1" width="3" position="-0.33 1.9 -2.13" value="up"
+						 rotation="0 0 0" text=""></a-text>
+						<a-entity id="spotlightP" light="type: spot; angle: 30; penumbra: 0.4; decay: 0.1; intensity: 0.5; castShadow: true"
+						 position="0 0 0"></a-entity>
+					</a-entity>
+					<!--endregion-->
+					<!-- #region L I G H T S      -->
+					<!-- _________________________________________________________ POINT -->
+					<!-- <a-box scale="3 1 9">
+      <a-entity id="point" light="type: point; color: white; intensity: 1"
+      rotation="0 0 0"
+      position="0 50 0"
+      light-on-mouseenter="to: "
+      light-on-mouseleave="to: "></a-entity>
+      </a-entity>
+      </a-box> -->
+					<!-- _____________________________________________________ SPOTLIGHT -->
+					<a-entity id="spotlight" dynamic-body geometry="primitive: sphere" light="type: spot; angle: 10; penumbra: 0.4; intensity: 5; castShadow: true"
+					 light-on-mouseenter light-on-mouseleave position="-30 2 0">
+						<!-- SHADOW TEST BOX ___________________________________________ -->
+						<a-box position="0 0.1 -5" shadow="recieve: true; cast: true" animation="property: scale; dir: alternate; dur: 1000; easing: easeInSine; loop: true; to: 0 0 0;"></a-box>
+					</a-entity>
+					<!-- ____________________________________________________ HEMISPHERE -->
+					<!-- <a-entity id="hemisphere" light="type: hemisphere; color: blue; groundColor: red; intensity: 0.5"
+      position="0 50 -180">
+        <a-sphere scale="10 10 10"></a-sphere>
+      </a-entity> -->
+					<!-- ___________________________________________________ DIRECTIONAL -->
+					<a-entity id="dirToMid" light="type: directional; intensity: 0.6" position="-300 150 0" target="#directionaltarget">
+						<a-entity id="directionaltarget" position="0 0 0"></a-entity>
+						<a-entity text-geometry="value: dirToMid" scale="15 15 15" rotation="60 0 0" material="color:white">
+						</a-entity>
+					</a-entity>
+					<!-- endregion -->
+					<!-- #region C O D E   P L A N E S-->
+					<!--                        >>>         >>>         >>>   >W H I T E -->
+					<a-entity id="whitePlaneRig" geometry="box" position="-87 40 -50">
+						<a-entity id="whitePlane" white geometry="primitive: plane; height: auto; width: auto" material="shader: flat; color: #a6a6a6"
+						 position="10 40 10" rotation="0 45 0" scale="40 70 20" side="double">
+						</a-entity>
+						<a-box scale="10 7 1.3" rotation="0 45 0" position="-5.2 70 25" material="" geometry=""></a-box>
+						<a-box scale="10 7 1.3" rotation="0 45 0" position="-5.2 60 25" material="" geometry=""></a-box>
+					</a-entity>
+					<!--                      _________________________________G R E E N -->
+					<a-entity id="greenPlane" green geometry="primitive: plane; height: auto; width: auto" material="shader: flat; color: #2eb82e"
+					 position="-42 40 -65" rotation="0 20 0" scale="40 70 20" side="double" visible=""></a-entity>
+					<!--                     >>>         >>>         >>>      >>>P I N K -->
+					<a-entity id="pinkPlane" pink geometry="primitive: plane; height: auto; width: auto" material="shader: flat; color: #ffccff"
+					 position="0 40 -72" rotation="0 0 0" scale="40 70 20" side="double" visible=""></a-entity>
+					<!--                     ________________________________Y E L L O W -->
+					<a-entity id="yellowPlane" yellow geometry="primitive: plane; height: auto; width: auto" material="shader: flat; color: #ffe699"
+					 position="42 40 -65" rotation="0 -20 0" scale="40 70 20" side="double" visible=""></a-entity>
+					<!--                    >>>         >>>         >>>      >>>>B L U E -->
+					<a-entity id="bluePlane" name="johnny" blue geometry="primitive: plane; height: auto; width: auto" material="shader: flat; color: #0099cc"
+					 position="77 40 -40" rotation="0 -45 0" scale="40 70 20" side="double" visible=""></a-entity>
+					<!-- endregion -->
+					<!-- #region G E O M E T R Y  -->
+					<!-- TRIANGLE ________________________________________________________ -->
+					<a-triangle tri color="red" vertex-c="1 -1 0" position="5 5 5" side="double"></a-triangle>
+					<!-- FLOATING SPHERE _________________________________________________ -->
+					<a-sphere scale="1 1 1" position="5 20 5" pos box invisible-on-mouseenter visible-on-mouseleave material="shader:gif;src:url(assets/Face2.gif);"
+					 scale="3 3 3" animation="property: scale; dir: alternate; dur: 1000; easing: easeInSine; loop: true; to: 3 3 3;"></a-sphere>
+					<!-- SPHERE WITH DYNAMIC BODY ________________________________________ -->
+					<a-sphere where-on-mouseenter where-on-mouseleave pos scale="1 1 1" position="5 20 9" dynamic-body material="shader:gif;src:url(assets/Face2.gif);"
+					 scale="3 3 3"></a-sphere>
+					<!-- BIG MOVING BOX ___________________________________________________-->
+					<a-box id="um" position="10 2 -5" rotation="0 45 45" scale="2 2 2" material="shader:gif;src:url(assets/Face2.gif);">
+						<a-animation attribute="position" direction="alternate" dur="2000" repeat="indefinite" to="0 20 -5"></a-animation>
+						<a-animation attribute="rotation" begin="click" dur="2000" to="360 405 45"></a-animation>
+						<a-animation attribute="scale" begin="mouseenter" dur="300" to="10 10 10"></a-animation>
+						<a-animation attribute="scale" begin="mouseleave" dur="300" to="2 2 2"></a-animation>
+					</a-box>
+					<!-- MOVING MMUSIC BOX ________________________________________________-->
+					<a-box>
+						<!-- <a-sound src="#NINA" autoplay="true" loop="true" position="-3 1 -4"></a-sound> -->
+						<a-animation attribute="position" direction="alternate" dur="2000" repeat="indefinite" to="10 10 0"></a-animation>
+					</a-box>
+					<a-cone color="tomato" radius-bottom="5" radius-top="0" wireframe="true" wireframe-linewidth="1" scale="120 1400 117"
+					 rotation="0 -180 -180" position=""></a-cone>
+					<a-circle color="white" radius="5" rotation="90 0 -90" position="0 680 0" scale="120 120 120"></a-circle>
+					<!-- SMALL CYLINDER ___________________________________________________-->
+					<a-cylinder id="cyl" pos position="10 2 -3" "thickness:100; color: black" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+					<!-- BIG CYLINDER _____________________________________________________-->
+					<a-cylinder id="cyl" dynamic-body position="10 2 30" radius="5" height="5" color="#FFC65D"></a-cylinder>
+					<a-text id="textCube" value="Now Interactable" geometry="primitive:plane" squa position="-32 1 30" side="double"
+					 material="wireframe: false" event-set__click="scale: 4 4 4 "></a-text>
+					<!-- TEST BOXES________________________________________________________-->
+					<a-box pos position="-32 2 35"></a-box>
+					<a-box position="-32 3 40" animation__yoyo="property: position; dir: alternate; dur: 1000;
+      easing: easeInSine; loop: true; to: 0 0 0"></a-box>
+					<a-box edd position="-32 4 45"></a-box>
+					<a-plane squa position="-32 5 50" side="double"></a-plane>
+					<!-- LINE _____________________________________________________________-->
+					<a-entity line="start: 0, 1, 0; end: 2 0 -5; color: red"></a-entity>
+					<!-- OBJ MODELS _______________________________________________________-->
+					<!-- <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl"
+      body="type: static; shape: mesh;"
+      position="100 5 77"
+      rotation="-90 0 0"></a-entity>
+
+      <a-entity obj-model="obj: #spi; mtl: #spi"
+      body="type: static; shape: mesh;"
+      position="100 -5 47"
+      rotation="0 0 0"></a-entity> -->
+					<a-entity obj-model="obj: #tree; mtl: #treemtl" body="type: static; shape: mesh;" position="-110 -0 17" rotation="0 0 0">
+						<a-entity position="0 20 0" light="type: point; intensity: 2.5; distance: 50; decay: 2"></a-entity>
+					</a-entity>
+					<!-- C U R V E D ______________________________________________________-->
+					<a-curvedimage opacity="0.7" color="#8d2e2e79" position="-10 4 -20" radius="3.6" height="2" rotation="0 0 0"
+					 theta-length="90" animation="property: rotation; dir: normal; dur: 5000;
+      easing: linear; loop: true; to: 0 360 0"></a-curvedimage>
+					<!-- <a-curvedimage opacity="1" color="#ffe44b" scale="30 10 30"
+      position="-171.45909339799562 154.62283622659317 216.79307179337005"
+      radius="3.6" height="2" rotation="0 -135.76191583559697 0"
+      theta-length="90" material=""
+      geometry="height:56.93;radius:14.78;segmentsRadial:3;thetaLength:180">
+    </a-curvedimage> -->
+					<a-curvedimage opacity="0.7" color="#67d136" position="-30 4 -20" radius="3.6" height="2" rotation="0 90 0"
+					 theta-length="90"></a-curvedimage>
+					<!-- endregion-->
+					<!-- #region L E S S O N S  -->
+					<!-- LESSON 1 -->
+					<a-entity id="lesson1" geometry="primitive: cone" color="blue" position="96 0 3" rotation="180 -90 180">
+						<a-entity id="spotlightLesson1" position="0 45 0" rotation="-90 180 180" light="type: spot; angle: 10; color: blue; penumbra: 0.4; intensity: 5; castShadow: true"
+						 animation="property: light.intensity; dir: alternate; dur: 1000;
+      easing: easeInSine; loop: true; to: 0">
+						</a-entity>
+						<a-cone position="0 10 0" color="blue" radius-bottom="3.1" opacity="0.3" height="8.3" radius-top="0"></a-cone>
+						<a-text position="0 4 0" scale="5 5 5" value="The this keyword"></a-text>
+						<a-text position="0 4 0" scale="5 5 5" rotation="0 180 0" value="The this keyword"></a-text>
+						<a-circle color="#0858c2" radius="5" rotation="-90 0 0"></a-circle>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#365ad1" radius="3.6" height="2" rotation="0 135 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#365ad1" radius="3.6" height="2" rotation="0 225 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#365ad1" radius="3.6" height="2" rotation="0 45 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#365ad1" radius="3.6" height="2" rotation="0 315 0"
+						 theta-length="70"></a-curvedimage>
+						<a-entity text-geometry="value: 1" rotation="0 180 0" shadow="recieve: true; cast: true" scale="8 8 8" position="1.8 6 0.35"
+						 material="color: blue">
+						</a-entity>
+					</a-entity>
+					<!-- LESSON 2 -->
+					<a-entity id="lesson2" geometry="primitive: cone" color="red" position="96 0 23" rotation="180 -90 180">
+						<a-entity id="spotlightLesson4" position="0 45 0" rotation="-90 180 180" light="type: spot; angle: 10; color: red; penumbra: 0.4; intensity: 5; castShadow: true"
+						 animation="property: light.intensity; dir: alternate; dur: 1000;
+      easing: easeInSine; loop: true; to: 0">
+						</a-entity>
+						<a-cone position="0 10 0" color="red" radius-bottom="3.1" opacity="0.3" height="8.3" radius-top="0"></a-cone>
+						<a-text position="0 4 0" scale="5 5 5" value="The this keyword"></a-text>
+						<a-text position="0 4 0" scale="5 5 5" rotation="0 180 0" value="The this keyword"></a-text>
+						<a-circle color="#941515" radius="5" rotation="-90 0 0"></a-circle>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#941515" radius="3.6" height="2" rotation="0 135 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#941515" radius="3.6" height="2" rotation="0 225 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#941515" radius="3.6" height="2" rotation="0 45 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#941515" radius="3.6" height="2" rotation="0 315 0"
+						 theta-length="70"></a-curvedimage>
+						<a-entity text-geometry="value: 2" rotation="0 180 0" shadow="recieve: true; cast: true" scale="8 8 8" position="1.8 6 0.35"
+						 material="color: red">
+						</a-entity>
+					</a-entity>
+					<!-- LESSON 3 -->
+					<a-entity id="lesson3" geometry="primitive: cone" color="yellow" position="96 0 43" rotation="180 -90 180">
+						<a-entity id="spotlightLesson4" position="0 45 0" rotation="-90 180 180" light="type: spot; angle: 10; color: yellow; penumbra: 0.4; intensity: 5; castShadow: true"
+						 animation="property: light.intensity; dir: alternate; dur: 1000;
+      easing: easeInSine; loop: true; to: 0">
+						</a-entity>
+						<a-cone position="0 10 0" color="yellow" radius-bottom="3.1" opacity="0.3" height="8.3" radius-top="0"></a-cone>
+						<a-text position="0 4 0" scale="5 5 5" value="The this keyword"></a-text>
+						<a-text position="0 4 0" scale="5 5 5" rotation="0 180 0" value="The this keyword"></a-text>
+						<a-circle color="#ffe70d" radius="5" rotation="-90 0 0"></a-circle>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#ffe70d" radius="3.6" height="2" rotation="0 135 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#ffe70d" radius="3.6" height="2" rotation="0 225 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#ffe70d" radius="3.6" height="2" rotation="0 45 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#ffe70d" radius="3.6" height="2" rotation="0 315 0"
+						 theta-length="70"></a-curvedimage>
+						<a-entity text-geometry="value: 3" rotation="0 180 0" shadow="recieve: true; cast: true" scale="8 8 8" position="1.8 6 0.35"
+						 material="color: yellow">
+						</a-entity>
+					</a-entity>
+					<!-- LESSON 4 -->
+					<a-entity id="lesson4" geometry="primitive: cone" color="green" position="96 0 63" rotation="180 -90 180">
+						<a-entity id="spotlightLesson4" position="0 45 0" rotation="-90 180 180" light="type: spot; angle: 10; color: green; penumbra: 0.4; intensity: 5; castShadow: true"
+						 animation="property: light.intensity; dir: alternate; dur: 1000;
+      easing: easeInSine; loop: true; to: 0">
+						</a-entity>
+						<a-cone position="0 10 0" color="green" radius-bottom="3.1" opacity="0.3" height="8.3" radius-top="0"></a-cone>
+						<a-text position="0 4 0" scale="5 5 5" value="The this keyword"></a-text>
+						<a-text position="0 4 0" scale="5 5 5" rotation="0 180 0" value="The this keyword"></a-text>
+						<a-circle color="#2a9415" radius="5" rotation="-90 0 0"></a-circle>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#2a9415" radius="3.6" height="2" rotation="0 135 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#2a9415" radius="3.6" height="2" rotation="0 225 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#2a9415" radius="3.6" height="2" rotation="0 45 0"
+						 theta-length="70"></a-curvedimage>
+						<a-curvedimage position="0 1.6 0" opacity="0.7" color="#2a9415" radius="3.6" height="2" rotation="0 315 0"
+						 theta-length="70"></a-curvedimage>
+						<a-entity text-geometry="value: 4" rotation="0 180 0" shadow="recieve: true; cast: true" scale="8 8 8" position="1.8 6 0.35"
+						 material="color: green">
+						</a-entity>
+					</a-entity>
+					<!-- endregion -->
+					<!-- #region T H E   3 D   T E X T -->
+					<a-entity id="teext" text-geometry="value: VR Code Editor" visible="true" rotation="33 0 0" shadow="recieve: true; cast: true"
+					 scale="15 15 15" position="-36 84 -67" material="color:white" event-set__enter="_event: mouseenter; text-geometry.value: eeeeeeeeeeee"
+					 event-set__leave="_event: mouseleave; text-geometry.value: Z Z Z Z Z Z Z">
+					</a-entity>
+					<!-- endregion -->
+				</a-scene>
+			</div>
+			<!-- #region   B U T T O N S    (T E X T   P L A N E S )  -->
+			<div class="textSlider1">
+				<button class="buttonB button2" onclick="textWhite();">
+					<p class="updown">
+						< UPDATE <</p> </button> </div> <div class="textSlider2">
+							<button class="buttonB button2" onclick="textGreen();">
+								<p class="updown">
+									< UPDATE <</p> </button> </div> <div class="textSlider3">
+										<button class="buttonB button2" onclick="textPink();">
+											<p class="updown">
+												< UPDATE <</p> </button> </div> <div class="textSlider4">
+													<button class="buttonB button2" onclick="textYellow();">
+														<p class="updown">
+															< UPDATE <</p> </button> </div> <div class="textSlider5">
+																<button class="buttonB button2" onclick="textBlue();">
+																	<p class="updown">
+																		< UPDATE <</p> </button> </div> <!-- endregion -->
+			</div>
+			<!-- ______________________________________T W O -->
+			<div class="grid-container2">
+				<!-- #region   P L A Y E R   C O N T R O L S             -->
+				<div class="fovText">
+					<p>FOV: <span id="fovState"></span>
+					</p>
+				</div>
+				<div class="movText">
+					<p>Movement speed: <span id="moveState"></span>
+				</div>
+				<div class="zoomText">
+					<p>Zoom: </p>
+				</div>
+				<div class="flyText">
+					<p id="onOff">ON</p>
+				</div>
+				<div class="xzText">
+					<p id="onOffAxis">in out</p>
+				</div>
+				<div class="hudText">
+					<p id="hud">ON</p>
+				</div>
+				<div class="opaText">
+					<p>Hud opacity: <span id="hudState"></span>
+					</p>
+				</div>
+				<div class="fov">
+					<input type="range" min="1" max="120" value="90" class="slider" id="myRange">
+					<p>
+						<span id="fovState"></span>
+					</p>
+				</div>
+				<div class="mov">
+					<input type="range" min="1" max="500000" value="200" class="slider" id="movSlider">
+					<p>
+						<span id="moveState"></span>
+				</div>
+				<div class="zoom">
+					<input type="number" id="myNumber" min="0" max="10" value="1">
+				</div>
+				<div class="torch">
+					<button class="button button2" onclick="toggleTorch();">Toggle torch</button>
+					<p id="onOffTorch"></p>
+				</div>
+				<div class="fly">
+					<button class="button button2" onclick="fly2();">Toggle fly</button>
+					<p id="onOff"></p>
+				</div>
+				<div class="xz">
+					<button class="button button2" onclick="wsAxis();">W S axis</button>
+					<p id="onOffAxis"></p>
+				</div>
+				<div class="hudOnOff">
+					<button class="button button2" onclick="hudOnOff();">HUD</button>
+					<p id="hud"></p>
+				</div>
+				<div class="hudOpa">
+					<input type="range" min="0" max="100" value="16" class="slider" id="hudSlider">
+					<p>
+						<span id="hudState"></span>
+					</p>
+				</div>
+				<!-- endregion -->
+			</div>
+	</body>
+
+</html>
