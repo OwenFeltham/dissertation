@@ -1,0 +1,77 @@
+
+
+//_______________________________________________V I S U A L   S E T T I N G S
+{
+  "workbench.colorTheme": "Monokai",
+
+  "workbench.colorCustomizations": {
+    "breadcrumb.activeSelectionForeground": "#09ff00",
+    "editorBracketMatch.background":      "#09ff0088",
+    "contrastActiveBorder":                 "#fa0000",
+    "scrollbarSlider.background":         "#4747474f",
+    "scrollbarSlider.activeBackground":   "#00e1ff7a",
+    "scrollbarSlider.hoverBackground":    "#e5ff005b",
+    "settings.dropdownBackground":          "#00345f", 
+   },
+  //_________________________________________________________________E D I T O R
+  "editor.rulers": [ 80 ],
+  "editor.wordWrapColumn": 80,
+  "editor.minimap.maxColumn": 80,
+  "editor.fontSize": 11,
+  "editor.cursorBlinking": "phase",
+  "editor.cursorStyle": "line-thin",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.dragAndDrop": false,
+  "editor.mouseWheelScrollSensitivity": 2,
+  "editor.renderLineHighlight": "none",
+  "editor.minimap.side": "left",
+  "editor.minimap.showSlider": "always",
+  "editor.quickSuggestionsDelay": 2000,
+  "editor.snippetSuggestions": "bottom",
+  "editor.showFoldingControls": "always",
+  "editor.smoothScrolling": true,
+  "editor.mouseWheelZoom": true,
+  "editor.renderWhitespace": "none",
+  //___________________________________________________________W O R K B E N C H
+  "workbench.activityBar.visible": true,
+  "workbench.sideBar.location": "left",
+  "workbench.statusBar.visible": false,
+  "workbench.editor.tabSizing": "shrink",
+  //_________________________________________________________________W I N D O W
+  "window.zoomLevel": 0,
+  "window.titleBarStyle": "custom",
+  "window.menuBarVisibility": "toggle",
+  "window.restoreWindows": "none",
+  //_____________________________________________________________Z E N   M O D E
+  "zenMode.hideActivityBar": false,
+  //_______________________________________________________B R E A D C R U M B S
+  "breadcrumbs.enabled": true,
+  //_______________________________________________________________L I N T E R S
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.showSuggestionsAsSnippets": true,
+  "css.lint.idSelector": "error",
+  "css.lint.fontFaceProperties": "warning",
+  "css.lint.float": "error",
+  "css.lint.boxModel": "warning",
+  "css.lint.compatibleVendorPrefixes": "warning",
+  "css.lint.duplicateProperties": "warning",
+  "css.lint.hexColorLength": "warning",
+  "css.lint.ieHack": "error",
+  "css.lint.important": "warning",
+  "css.lint.importStatement": "warning",
+  "css.lint.universalSelector": "warning",
+  "css.lint.unknownVendorSpecificProperties": "warning",
+  "html.format.indentInnerHtml": true,
+  "html.format.preserveNewLines": false,
+  "html.format.wrapLineLength": 120,
+  //___________________________________________________________________F I L E S
+  "files.autoGuessEncoding": true,
+  "files.useExperimentalFileWatcher": true,
+  //_________________________________________________________E X T E N S I O N S
+  "bracketPairColorizer.forceIterationColorCycle": true,
+  "bracketPairColorizer.forceUniqueOpeningColor": true,
+  "bracketPairColorizer.rulerPosition": "Full",
+  "bracketPairColorizer.showBracketsInGutter": true,
+  "bracketPairColorizer.showBracketsInRuler": true,
+}

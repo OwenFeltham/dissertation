@@ -1,0 +1,16 @@
+# Exported from 3D Builder
+
+newmtl dddd
+Kd 1.000000 0.517647 0.956863
+
+newmtl Black
+Kd 0.000000 0.000000 0.000000
+
+newmtl White
+Kd 1.000000 1.000000 1.000000
+
+newmtl White_0
+Kd 1.000000 1.000000 1.000000
+
+newmtl palette
+Kd 1.000000 1.000000 1.000000
