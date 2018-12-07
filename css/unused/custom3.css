@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: consolas, sans-serif;
+  background: rgb(110, 110, 170);
+}
+
+body {
+  margin: 0;
+}
+
+#canvfasDiv {
+  height: 100px;
+  width: 100px;
+  /* display: none; */
+}
+
+

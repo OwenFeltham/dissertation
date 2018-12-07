@@ -1,0 +1,314 @@
+* {
+  box-sizing: border-box;
+  font-family: consolas;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #a1a1a1;
+}
+
+p {
+  display: inline-block;
+  text-align: center;
+  font-size: 10px;
+  color: rgb(248, 248, 248);
+  margin:0 ;
+}
+
+/*______________________________________________________________________________
+
+              ,ad8888ba,   88888888ba   88  88888888ba,
+             d8"'    `"8b  88      "8b  88  88      `"8b   
+            d8'            88      ,8P  88  88        `8b  
+            88             88aaaaaa8P'  88  88         88  
+            88      88888  88""""88'    88  88         88  
+            Y8,        88  88    `8b    88  88         8P  
+             Y8a.    .a88  88     `8b   88  88      .a8P   
+              `"Y88888P"   88      `8b  88  88888888Y"'                       */
+
+  .header             { grid-area: he }
+  .nav                { grid-area: nv }
+
+  .VR                 { grid-area: vr }
+
+  .playerControls     { grid-area: pc }
+  .playerControls2    { grid-area: p2 }  
+
+  .rightSideButtons   { grid-area: rs }
+  .bottomLeftButtons  { grid-area: bl }
+  .bottomRightButtons { grid-area: br }
+
+  .textPlane1         { grid-area: t1 }  
+  .textPlane2         { grid-area: t2 }
+  .textPlane3         { grid-area: t3 }
+  .textPlane4         { grid-area: t4 }
+  .textPlane5         { grid-area: t5 }
+  .textSlider1        { grid-area: s1 }
+  .textSlider2        { grid-area: s2 }
+  .textSlider3        { grid-area: s3 }
+  .textSlider4        { grid-area: s4 }
+  .textSlider5        { grid-area: s5 }
+
+  .ctrlWhite          { grid-area: cW }
+  .ctrlGreen          { grid-area: cG }
+  .ctrlPink           { grid-area: cP }
+  .ctrlYellow         { grid-area: cY }
+  .ctrlBlue           { grid-area: cB }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+  
+  /* C O L U M N   NUMBER    */
+
+  /* 1  2  3  4  5  6  7  8      */
+    'he .  cW cG cP cY cB . '    /*  1         R         */
+    'nv .  cW cG cP cY cB . '    /*  2         O         */
+    't1 s1 vr vr vr vr vr rs'    /*  3         W         */
+    't2 s2 vr vr vr vr vr rs'    /*  4                   */
+    't3 s3 vr vr vr vr vr rs'    /*  5         N         */
+    't4 s4 vr vr vr vr vr rs'    /*  6         U         */
+    't5 s5 vr vr vr vr vr rs';   /*  7         M         */
+
+
+  /*                  1    2    3     4     5     6     7      */
+  grid-template-rows: 100px 40px 150px 150px 150px 150px 150px;  
+  
+  /*                     1   2    3    4    5    6    7    8                    */
+  grid-template-columns: 20% 30px auto auto auto auto auto 80px;                 
+  grid-gap: 3px;
+  background-color: #a1a1a1;
+  height: 69vh;
+  padding: 3px;
+}
+
+/*============================================================================*/
+
+.torch                { grid-area: to }
+.fov                  { grid-area: fi }
+.mov                  { grid-area: mi }
+.zoom                 { grid-area: zi }
+.fly                  { grid-area: xi }
+.xz                   { grid-area: wi }
+.hudOnOff             { grid-area: hi }
+.hudOpa               { grid-area: oi } 
+
+.fovText              { grid-area: ft }
+.movText              { grid-area: mt }
+.zoomText             { grid-area: zt }
+.flyText              { grid-area: xt }
+.xzText               { grid-area: wt }
+.hudText              { grid-area: ht }
+.opaText              { grid-area: ot } 
+
+.grid-container2 {
+  display: grid;
+  font-size: 10px;
+  grid-template-areas:
+ 
+'to to'
+'fi ft'
+'mi mt'
+'zi zt'
+'xi xt'
+'wi wt'
+'hi ht'
+'oi ot';
+
+  /*                  1    2    3    4    5    6    7   */
+  grid-template-rows: auto auto auto auto auto auto auto auto ;  
+  
+  /*                     1    2    3     4     5     6     7     8                    */
+  grid-template-columns: 130px 130px;                  
+  grid-gap: 3px;
+  background-color: #a1a1a100;
+  height: 10vh;
+  padding: 3px;
+  position: absolute;
+  z-index: 9999;
+  left: 28%;
+  top: 560px;
+}
+
+.grid-container2 p {
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+/*_________________________________________________________________TEXT PLANES*/
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0);
+  text-align: center;
+  font-size: 25px;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  color: white;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #b1961000;
+  font-size: 10px;
+  border: none;
+  z-index: 50; 
+  position: relative;
+}
+
+.subCode {
+  position: relative;
+  top: -37px;
+  z-index: 70;
+  height: 15px;
+  width: 50%;
+  font-size: 10px;
+}
+
+.textPlane1 { 
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;  
+}
+#userInput  {  background-color: #ffffff50; }
+
+.textPlane2 {
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+}
+#userInput2 {  background-color: #b40000; }
+
+.textPlane3 {
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+}
+#userInput3 {  background-color: #ff6eff5d; }
+
+.textPlane4 {
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+}
+#userInput4 {  background-color: #ffbf0038; }
+
+.textPlane5 {
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+}
+#userInput5 {  background-color: #0099cc42; }
+
+.grid-container> div.ctrlWhite { 
+  background-color: rgba(255, 255, 255, 0.274);
+  min-width: 100px;
+ }
+ .grid-container> div.ctrlGreen { 
+  background-color: #7eff644f;
+  min-width: 100px;  
+ }
+ .grid-container> div.ctrlPink  { 
+  background-color: #ff6eff5d;
+  min-width: 100px; 
+}
+ .grid-container> div.ctrlYellow { 
+  background-color: #ffbf0038;
+  min-width: 100px;
+ }
+
+.grid-container> div.ctrlBlue  { 
+  background-color: #2786bb80;
+  min-width: 100px;  
+ }
+
+/*_______________________________________________________________3D / VR SCENE*/
+.VR { 
+  background-color: black;
+  box-shadow: 0 -9px 20px 10px rgba(0, 0, 0, 1) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+}
+
+canvas {
+  grid-area: 3 / 6 / 3 / 2;
+  width: 72vw;
+  opacity: 0.9;
+}
+
+/*_______________________________________________________________B U T T O N S*/
+button {
+    background-color: rgba(0, 0, 0, 0.158); 
+    border: none;
+    color: white;
+    padding: 8px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 4px 0px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.buttonB {
+    background-color: rgba(0, 0, 0, 0.158); 
+    border: none;
+    color: #ffffff;
+    padding: 4px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 1px -12px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),
+    0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/*_________________________________________________________________LISTS AND P*/
+ul {
+  list-style-type: none;
+  padding: 0;
+  font-size: 10px;
+}
+
+li {
+  display: inline;
+  font-size: 10px;
+  text-align: center;
+  margin: 5px;
+}
+
+/*_____________________________________________________________ S L I D E R S */
+#myRange { 
+  width: 100px; 
+  position: relative;
+  top: 5px;
+}
+
+#movSlider { 
+  width: 100px; 
+  position: relative;
+  top: 5px;
+}
+
+#myNumber { 
+  width: 50px; 
+}
+
+/*______________________________________HIDE THE CANVAS USED FOR SKY TEXTURE__*/
+#canvasDiv9 {
+  display: none;
+}
+
+.updown {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: 10px;
+}
+
+#myNumber {
+  margin: 10px 0 10px 0;
+}

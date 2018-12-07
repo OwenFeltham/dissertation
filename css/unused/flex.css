@@ -1,0 +1,85 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    text-align: center;
+    font-size: 25px;
+    height: 50px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    height: 1100px;/* Should be removed. Only for demonstration */
+}
+
+#angular {
+  z-index: 9999;
+}
+
+.column3D {
+  float: left;
+  width: 75%;
+  padding: 10px;
+  height: 1100px;/* Should be removed. Only for demonstration */
+}
+
+.columnR {
+  float: left;
+  width: 5%;
+  padding: 10px;
+  height: 1100px;/* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+.a-enter-vr {
+  font-family: sans-serif,monospace;
+  font-size: 13px;
+  width: 100%;
+  font-weight: 200;
+  line-height: 16px;
+  position: static;
+  z-index: 400;
+}
+
+
+textarea#angularIns {
+  height: 90%;
+  width: 300px;
+  position: fixed;
+  z-index: 9999;
+  top: 30px;
+  left: 30px;
+  font-size: 10px;
+  box-shadow: 0 -9px 8px 0 rgba(34, 34, 34, 0.2) inset, 
+  0 6px 20px 0 rgba(66, 66, 66, 0.7) inset;  
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
