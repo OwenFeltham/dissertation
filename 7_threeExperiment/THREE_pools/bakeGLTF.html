@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Staircases and Collision</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" type="image/png" href="/favicon.png" />
+		<link href="https://fonts.googleapis.com/css?family=Atomic+Age|Cinzel|Coming+Soon|
+		Cormorant+SC|Cutive+Mono|Josefin+Sans:100|Julius+Sans+One|Mountains+of+Christmas|
+		Nixie+One|Nosifer|Playfair+Display+SC|Suez+One|Quicksand|Space+Mono|Rubik+Mono+One|Vast+Shadow"
+		 rel="stylesheet">
+	
+		<!-- endregion -->
+		<link rel="stylesheet" type="text/css" href="/7_threeExperiment/css/COLORgrid.css">
+	</head>
+
+	<body>
+		<!-- ______________________________________O N E -->
+		<div class="grid-container">
+			<!-- #region C A N V A S E S -->
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas2" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<!-- endregion -->
+			<a href="/index.html">
+				<div class="header">Javascript 3D Experiments</div>
+			</a>
+			<!-- #region N A V B A R -->
+			<div class="nav">
+				<ul>
+					<a href="/index.html">
+						<li class="buttonS">Home</li>
+					</a>
+					<a href="StaircasesPly.html">
+						<li class="current">1. &nbspStaircases and Collision</li>
+					</a>
+					<a href="/6_light/Light.html">
+						<li class="buttonS">2.&nbsp Learn with Light</li>
+					</a>
+					<a href="/7_threeExperiment/threeJsExperiment.html">
+						<li class="buttonS">3. &nbspTHREE js experiment</li>
+					</a>
+					<a href="/1_panesConcept/panesConcept.html">
+						<li class="buttonS">4. &nbspPanes Concept</li>
+					</a>
+					<a href="/2_extrudedText/extrudedText.html">
+						<li class="buttonS">5. &nbspExtruded Text</li>
+					</a>
+					<a href="/3_experimentalHub/experimentalHub.html">
+						<li class="buttonS">6. &nbspExperimental Hub</li>
+					</a>
+					<a href="/4_mainTextPlanes/mainTextPlanes.html">
+						<li class="buttonS">7. &nbspMain Text Panes</li>
+					</a>
+				</ul>
+			</div>
+			<!-- endregion -->
+			<!-- #region P A N E   W O R L D   C O N T R O L  -->
+			<div class="ctrlWhite">
+				<p>Fly on or off</p>
+			</div>
+			<div class="ctrlGreen">
+				<p>Pointer lock</p>
+			</div>
+			<div class="ctrlPink">
+				<p>Reset player position</p>
+			</div>
+			<div class="ctrlYellow">
+				<p>Physics hitbox lines on</p>
+			</div>
+			<div class="ctrlBlue">
+				<p>Physics hitbox lines off</p>
+			</div>
+			<!-- endregion-->
+			<div class="VR">
+			<script src="js/three.js"></script>
+			<script src="js/OrbitControls.js"></script>
+			<script src="js/FirstPersonControls.js"></script>
+			<!-- <script src="js/onload.js"></script> -->
+			<script src="js/OBJLoader.js"></script>
+			<script src="js/MTLLoader.js"></script>
+			<script src="js/GLTFLoader.js"></script>
+			<script src="js/lightOrbit.js"></script>
+			<script src="js/newGltfObj.js"></script>
+			<script src="js/newObjFile.js"></script>
+			<!-- <script src="js/newPlyFile.js"></script> -->
+			<script>
+
+				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				//@@@@@@@@@@@@@@@@@@@@@@@@@@@   C O N T R O L S   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   V    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+				//-----------------------------A L L O W    U S E R   T O    I N P U T   T W O   
+				//-----------------------------D I R E C T I O N S   A T   O N C E
+
+				var left = false;
+				var right = false;
+				var up = false;
+				var down = false;
+				var mouseleft = false;
+				var mouseRight = false;
+				var mouseUp = false;
+				var mouseDown = false;
+
+				window.addEventListener('keyup', function (key) {
+					if (key.which == 65) { left = false; }
+					if (key.which == 68) { right = false; }
+					if (key.which == 87) { up = false; }
+					if (key.which == 83) { down = false; }
+				});
+
+				window.addEventListener('keydown', function (key) {
+					if (key.which == 65) { left = true; }
+					if (key.which == 68) { right = true; }
+					if (key.which == 87) { up = true; }
+					if (key.which == 83) { down = true; }
+				});
+
+				// V A R S
+				var x = document.getElementsByClassName("VR");
+			let el = x[0];
+				let width = el.clientWidth;
+				let height = el.clientHeight;
+
+				let scene = new THREE.Scene();
+
+				//   fogColor = new THREE.Color(0xffffff);
+
+				//  scene.background = fogColor;
+				//  scene.fog = new THREE.Fog(fogColor, 25, 100);
+
+				let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+				// var camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+				let renderer = new THREE.WebGLRenderer({ antialias: true });
+				//______________________________________________________________________________
+
+				// R E N D E R E R
+				renderer.setSize(width, height, true);
+				document.body.appendChild(renderer.domElement);
+
+				renderer.setClearColor(0xA1A1A1);
+
+				renderer.shadowMap.enabled = true;
+				renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+				//______________________________________________________________________________
+				// C U B E
+				var geometry = new THREE.BoxGeometry(1, 6, 1);
+				var material = new THREE.MeshStandardMaterial({
+					color: 0xff0051,
+					shading: THREE.FlatShading,
+					metalness: 0,
+					roughness: 1
+				});
+				var cube = new THREE.Mesh(geometry, material);
+
+				cube.castShadow = true;
+				cube.receiveShadow = true;
+				cube.position.set(0, 5, 0);
+
+				scene.add(cube);
+				//______________________________________________________________________________
+
+				// G R I D                                                     
+				var size = 100;
+				var divisions = 300;
+				var grid = new THREE.GridHelper(size, divisions);
+				grid.position.set(0, -1, 0);
+				scene.add(grid);
+				//______________________________________________________________________________
+
+				// P O L A R   G R I D
+				var helper = new THREE.PolarGridHelper(10, 16, 8, 64);
+				scene.add(helper);
+				//______________________________________________________________________________
+				
+				newGltfFile('3dmodels/bakePool/5.gltf', 0, 0, 0);
+				newGltfFile('3dmodels/bakePool/6.gltf', 63, 0, 0);
+				newGltfFile('3dmodels/bakePool/3.gltf', 63, 0, 63);
+				newGltfFile('3dmodels/bakePool/lamp.gltf', 0, 63, 0);
+				newGltfFile('3dmodels/bakePool/4.gltf', -63, 0, 0);
+				newGltfFile('3dmodels/bakePool/1.gltf', -63, 0, 63);
+				newGltfFile('3dmodels/bakePool/2.gltf', 0, 0, 63);
+				newGltfFile('3dmodels/bakePool/9.gltf', 63, 0, -63);
+				newGltfFile('3dmodels/bakePool/7.gltf', -63, 0, -63);
+				newGltfFile('3dmodels/bakePool/plant.gltf', -4, 62, -32);
+				newGltfFile('3dmodels/bakePool/8.gltf', 0, 0, -63);
+				newGltfFile('3dmodels/bakePool/apartment.gltf', 0, 0, -126);
+			
+
+				// _____________________________________________________________________________
+
+				// L I N E
+				var material1 = new THREE.LineBasicMaterial({ color: 0x0000ff });
+				var geometry = new THREE.Geometry();
+				geometry.vertices.push(new THREE.Vector3(-10, 0, -20));
+				geometry.vertices.push(new THREE.Vector3(8, 5, -5));
+				geometry.vertices.push(new THREE.Vector3(10, 0, 0));
+				geometry.vertices.push(new THREE.Vector3(30, -40, -40));
+
+				var line = new THREE.Line(geometry, material1);
+				scene.add(line);
+				// _____________________________________________________________________________
+
+				// L I G H T S
+				var lights = [];
+				lights[0] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[1] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[2] = new THREE.PointLight(0xffffff, 2, 200, 2);
+
+				lights[0].position.set(-50, 60, -50);
+				lights[1].position.set(0, 60, 0);
+				lights[2].position.set(50, 60, 50);
+
+				lights[0].castShadow = true;
+				lights[0].shadow.mapSize.width = 1024;
+				lights[0].shadow.mapSize.height = 1024;
+
+				scene.add(lights[0]);
+				scene.add(lights[1]);
+				scene.add(lights[2]);
+
+				lights[3] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[4] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[5] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[3].position.set(50, 60, -50);
+				lights[4].position.set(0, 10, 0);
+				lights[5].position.set(-50, 60, 50);
+				scene.add(lights[3]);
+				scene.add(lights[4]);
+				scene.add(lights[5]);
+
+
+
+
+
+				var sphereSize = 1;
+				var pointLightHelper = new THREE.PointLightHelper(lights[0], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[1], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[2], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[3], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[4], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[5], sphereSize);
+				scene.add(pointLightHelper);
+
+	var amLight = new THREE.AmbientLight( 0x404040 ); 
+	scene.add(amLight);
+
+				// _____________________________________________________________________________
+
+
+				// C A M E R A
+				camera.position.set(0, 40, 40);
+				// camera.lookAt(new THREE.Vector3( 0, 0, 0 ));
+				//______________________________________________________________________________
+
+				// A N I M A T E
+				var animate = function () {
+					requestAnimationFrame(animate);
+
+					if (left) {
+						camera.position.x -= 0.6;
+					}
+					if (right) {
+						camera.position.x += 0.6;
+					}
+					if (up) {
+						camera.position.z -= 0.6;
+					}
+					if (down) {
+						camera.position.z += 0.6;
+					}
+
+
+					cube.rotation.x += 0.1;
+					cube.rotation.y += 0.05;
+
+					// lightShow();
+
+					renderer.render(scene, camera);
+				};
+
+				animate();
+				//______________________________________________________________________________
+
+				// C O N T R O L S
+				var controls = new THREE.OrbitControls(camera, renderer.domElement);
+				controls.addEventListener('change', function () { renderer.render(scene, camera); });
+
+//______________________________________________________________________________
+
+			</script>
+			</div>
+			<!-- #region   B U T T O N S    (R I G H T   S I D E )    -->
+			<div class="rightSideButtons">
+				<div class="btn-group">
+				</div>
+			</div>
+			<!-- endregion -->
+			<!-- #region   B U T T O N S    (T E X T   P L A N E S )  -->
+			<div class="textSlider1">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider2">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider3">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<!-- endregion -->
+		</div>
+		<!-- ______________________________________T W O -->
+		<div class="grid-container2">
+			<!-- #region   P L A Y E R   C O N T R O L S             -->
+			<div class="fovText">
+				<p>FOV: <span id="fovState"></span>
+				</p>
+			</div>
+			<div class="movText">
+				<p>Movement speed: <span id="moveState"></span>
+			</div>
+			<div class="hudText">
+				<p id="hud">ON</p>
+			</div>
+			<div class="opaText">
+				<p>Hud opacity: <span id="hudState"></span>
+				</p>
+			</div>
+			<div class="fov">
+				<input type="range" min="1" max="120" value="90" class="slider" id="myRange">
+				<p>
+					<span id="fovState"></span>
+				</p>
+			</div>
+			<div class="mov">
+				<input type="range" min="1" max="5" value="1" class="slider" id="movSlider">
+				<p>
+					<span id="moveState"></span>
+			</div>
+			<div class="torch">
+				<button class="button button2" onclick="toggleTorch();">Toggle torch</button>
+				<p id="onOffTorch"></p>
+			</div>
+			<div class="hudOnOff">
+				<button class="button button2" onclick="hudOnOff();">HUD</button>
+				<p id="hud"></p>
+			</div>
+			<div class="hudOpa">
+				<input type="range" min="0" max="100" value="16" class="slider" id="hudSlider">
+				<p>
+					<span id="hudState"></span>
+				</p>
+			</div>
+			<!-- endregion -->
+		</div>
+	</body>
+
+</html>

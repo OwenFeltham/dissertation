@@ -1,0 +1,367 @@
+* {
+  box-sizing: border-box;
+  font-family: consolas;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+	background: rgb(94, 94, 94);
+	overflow: hidden;
+}
+
+p {
+  display: inline-block;
+  text-align: center;
+  font-size: 10px;
+  color: rgb(248, 248, 248);
+  margin: 0;
+}
+
+/*______________________________________________________________________________
+
+              ,ad8888ba,   88888888ba   88  88888888ba,
+             d8"'    `"8b  88      "8b  88  88      `"8b   
+            d8'            88      ,8P  88  88        `8b  
+            88             88aaaaaa8P'  88  88         88  
+            88      88888  88""""88'    88  88         88  
+            Y8,        88  88    `8b    88  88         8P  
+             Y8a.    .a88  88     `8b   88  88      .a8P   
+              `"Y88888P"   88      `8b  88  88888888Y"'                       */
+
+  .header             { grid-area: he }
+  .nav                { grid-area: nv }
+
+  .VR                 { grid-area: vr }
+
+  .playerControls     { grid-area: pc }
+  .playerControls2    { grid-area: p2 }  
+
+  .rightSideButtons   { grid-area: rs }
+  .bottomLeftButtons  { grid-area: bl }
+  .bottomRightButtons { grid-area: br }
+
+  .textPlane3         { grid-area: t3 }
+  .textPlane4         { grid-area: t4 }
+  .textPlane5         { grid-area: t5 }
+  .textSlider1        { grid-area: s1 }
+  .textSlider2        { grid-area: s2 }
+  .textSlider3        { grid-area: s3 }
+  .textSlider4        { grid-area: s4 }
+  .textSlider5        { grid-area: s5 }
+
+  .ctrlWhite          { grid-area: cW }
+  .ctrlGreen          { grid-area: cG }
+  .ctrlPink           { grid-area: cP }
+  .ctrlYellow         { grid-area: cY }
+  .ctrlBlue           { grid-area: cB }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+
+    'he .  cW cG cP cY cB . '    /*  1         R         */
+    'he .  s1 s2 s3 s4 .  . '    /*  2         O         */
+    'nv .  vr vr vr vr vr rs'    /*  3         W         */
+    'nv .  vr vr vr vr vr rs'    /*  4                   */
+    'nv .  vr vr vr vr vr rs'    /*  5         N         */
+    'nv .  vr vr vr vr vr rs'    /*  6         U         */
+    '.  .  .  .  .  .  .  rs';   /*  7         M         */
+
+  grid-template-rows: 50px 20px 200px 200px 200px 150px auto;  
+  grid-template-columns: 260px 20px auto auto auto auto auto 10px;                 
+	grid-gap: 3px;
+	z-index: 0;
+	background: rgb(94, 94, 94);	
+  height: 100vh;
+	padding: 10px;
+	box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.2) inset, 
+	0 6px 20px 0 rgba(0, 0, 0, 0.7) inset; 
+}
+
+/*============================================================================*/
+
+.torch                { grid-area: to }
+.fov                  { grid-area: fi }
+.mov                  { grid-area: mi }
+.zoom                 { grid-area: zi }
+.fly                  { grid-area: xi }
+.xz                   { grid-area: wi }
+.hudOnOff             { grid-area: hi }
+.hudOpa               { grid-area: oi } 
+
+.fovText              { grid-area: ft }
+.movText              { grid-area: mt }
+.zoomText             { grid-area: zt }
+.flyText              { grid-area: xt }
+.xzText               { grid-area: wt }
+.hudText              { grid-area: ht }
+.opaText              { grid-area: ot } 
+
+.grid-container2 {
+  display: grid;
+  font-size: 10px;
+  grid-template-areas:
+		'to to'
+		'fi ft'
+		'mi mt'
+		'zi zt'
+		'xi xt'
+		'wi wt'
+		'hi ht'
+		'oi ot';
+  grid-template-rows: auto auto auto auto auto auto auto auto ;  
+  grid-template-columns: 130px 130px;                  
+  grid-gap: 3px;
+  background-color: #a1a1a100;
+  height: 10vh;
+  padding: 3px;
+  position: absolute;
+  z-index: 9999;
+  left: 20px;
+  top: 560px;
+}
+
+.grid-container2 p {
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+/*_________________________________________________________________TEXT PLANES*/
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0);
+  text-align: center;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  color: white;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #b1961000;
+  font-size: 10px;
+  border: none;
+  z-index: 50; 
+  position: relative;
+}
+
+.subCode {
+  position: relative;
+  top: -37px;
+  z-index: 70;
+  height: 15px;
+  width: 50%;
+  font-size: 10px;
+}
+
+.textPlane1 { 
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;  
+}
+#userInput  {  background-color: #ffffff50; }
+
+.textPlane2 {
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+}
+#userInput2 {  background-color: #7eff644f; }
+
+.textPlane3 {
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+}
+#userInput3 {  background-color: #ff6eff5d; }
+
+.textPlane4 {
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+}
+#userInput4 {  background-color: #ffbf0038; }
+
+.textPlane5 {
+  box-shadow: 0 -9px 8px 0 rgba(0, 0, 0, 0.6) inset, 
+  0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+}
+#userInput5 {  background-color: #0099cc42; }
+
+.grid-container> div.ctrlWhite { 
+  min-width: 100px;
+ }
+ .grid-container> div.ctrlGreen { 
+    min-width: 100px;  
+ }
+ .grid-container> div.ctrlPink  { 
+    min-width: 100px; 
+}
+ .grid-container> div.ctrlYellow { 
+    min-width: 100px;
+ }
+
+.grid-container> div.ctrlBlue  { 
+    min-width: 100px;  
+ }
+
+/*_______________________________________________________________3D / VR SCENE*/
+.VR { 
+	background-color: #000000;
+	z-index: 0;
+  box-shadow: 0 -9px 20px 10px rgba(0, 0, 0, 1) inset, 
+	0 6px 20px 0 rgba(0, 0, 0, 1) inset;
+	border-radius: 8px;
+}
+
+canvas {
+	position: absolute;
+	top: 86px;  
+	left: 296px;
+	width: 72vw;
+	opacity: 0.9;
+	border-radius: 8px;
+}
+
+/*_______________________________________________________________B U T T O N S*/
+button {
+    background-color: rgba(0, 0, 0, 0.158); 
+    border: none;
+    color: white;
+    padding: 8px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 4px 0px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.buttonB {
+    background-color: rgba(0, 0, 0, 0.158); 
+    border: none;
+    color: #ffffff;
+    padding: 4px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 1px -12px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),
+    0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/*_________________________________________________________________LISTS AND P*/
+ul {
+	font-size: 1em;
+	text-align: left;	
+	font-family: Cinzel;
+	list-style: none;
+	margin: 55px 5px 5px 5px;
+}
+
+li {
+  font-size: 1em;
+	font-family: Cinzel;
+	color: white; 
+}
+
+/*_____________________________________________________________ S L I D E R S */
+#myRange { 
+  width: 100px; 
+  position: relative;
+  top: 5px;
+}
+
+#movSlider { 
+  width: 100px; 
+  position: relative;
+  top: 5px;
+}
+
+#myNumber { 
+  width: 50px; 
+}
+
+/*______________________________________HIDE THE CANVAS USED FOR SKY TEXTURE__*/
+#canvasDiv9 {
+  display: none;
+}
+
+.updown {
+  font-size: 10px;
+}
+
+#myNumber {
+  margin: 10px 0 10px 0;
+}
+
+.plsHover {
+	position: relative;
+	z-index: 500;
+  grid-row: 1 / 2;
+  grid-column: 1 / 2; 
+}
+
+.header {
+	font-family: Quicksand;
+	color: white;
+	font-size: 2em;
+	text-shadow: 5px 4px 20px black;
+	text-align: center;
+	position: relative;
+	top: 25px;
+}
+
+.nav  { 
+	font-family: Cinzel;
+	font-size: 0.3em;
+ }
+
+ .buttonS {
+	background-color: #ddd;
+	border: none;
+	color: black;
+	margin: 4px 0 4px 13px;
+  font-size: 3.9em;
+	cursor: pointer;
+	border-radius: 8px;
+	padding: 5px;
+}
+
+.buttonS:hover {
+	background-color: #f1f1f1;
+	font-size:4em;
+}
+
+.current {
+	background-color: rgb(231, 103, 103);
+	border: gray;
+	color: black;
+	margin: 4px 0 4px 0;
+  font-size: 4em;
+	cursor: pointer;
+	border-radius: 8px;
+	padding: 5px;
+}
+
+a {
+	text-decoration: none;
+}
+
+#canvas1 {
+	display: none;
+}
+
+#canvas2 {
+	display: none;
+}
+
+#canvas3 {
+	display: none;
+}

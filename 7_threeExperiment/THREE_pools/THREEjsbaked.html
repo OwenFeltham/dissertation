@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Lesson 5 normal text</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="css/grid.css">
+
+		<link rel="stylesheet" type="text/css" href="/7_threeExperiment/css/COLORgrid.css">
+
+	</head>
+
+	<body class="grid-container">
+		<div id="canvasDiv9">
+			<canvas id="canvas1"></canvas>
+			<canvas id="canvas2"></canvas>
+			<canvas id="canvas3"></canvas>
+		</div>
+		<div class="item1">Lesson</div>
+		<div class="nav">
+			<ul>
+				<a href="Tutorial.html">
+					<li>Tutorialss World</li>
+				</a>
+				<a href="Sandbox.html">
+					<li> Sandbox World</li>
+				</a>
+				<a href="Light.html">
+					<li> Learn with Light World</li>
+				</a>
+				<a href="Game.html">
+					<li> Platform and learn world</li>
+				</a>
+				<a href="2dtext.html">
+					<li> 2D text</li>
+				</a>
+				<a href="3d.html">
+					<li> 3D text</li>
+				</a>
+				<a href="THREEjs.html">
+					<li> THREE js experiment</li>
+				</a>
+			</ul>
+		</div>
+		<div class="item2">
+			<form id="form" onsubmit="return false;">
+				<textarea type="text" id="userInput" cols="120" rows="50" placeholder="Paste your source code here"></textarea>
+				<input class="subCode" type="submit" onclick="othername();" />
+			</form>
+		</div>
+		<div class="item3" autofocus>
+			<script src="js/three.js"></script>
+			<script src="js/OrbitControls.js"></script>
+			<script src="js/FirstPersonControls.js"></script>
+			<!-- <script src="js/onload.js"></script> -->
+			<script src="js/OBJLoader.js"></script>
+			<script src="js/MTLLoader.js"></script>
+			<script src="js/GLTFLoader.js"></script>
+			<script src="js/lightOrbit.js"></script>
+			<script src="js/newGltfObj.js"></script>
+			<script src="js/newObjFile.js"></script>
+			<!-- <script src="js/newPlyFile.js"></script> -->
+			<script>
+
+				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				//@@@@@@@@@@@@@@@@@@@@@@@@@@@   C O N T R O L S   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   V    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+				//-----------------------------A L L O W    U S E R   T O    I N P U T   T W O   
+				//-----------------------------D I R E C T I O N S   A T   O N C E
+
+				var left = false;
+				var right = false;
+				var up = false;
+				var down = false;
+				var mouseleft = false;
+				var mouseRight = false;
+				var mouseUp = false;
+				var mouseDown = false;
+
+				window.addEventListener('keyup', function (key) {
+					if (key.which == 65) { left = false; }
+					if (key.which == 68) { right = false; }
+					if (key.which == 87) { up = false; }
+					if (key.which == 83) { down = false; }
+				});
+
+				window.addEventListener('keydown', function (key) {
+					if (key.which == 65) { left = true; }
+					if (key.which == 68) { right = true; }
+					if (key.which == 87) { up = true; }
+					if (key.which == 83) { down = true; }
+				});
+
+
+
+				// V A R S
+				let el = document.querySelector(".item3");
+
+				let width = el.clientWidth;
+				let height = el.clientHeight;
+
+				let scene = new THREE.Scene();
+
+				//   fogColor = new THREE.Color(0xffffff);
+
+				//  scene.background = fogColor;
+				//  scene.fog = new THREE.Fog(fogColor, 25, 100);
+
+				let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+				// var camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+				let renderer = new THREE.WebGLRenderer({ antialias: true });
+				//______________________________________________________________________________
+
+				// R E N D E R E R
+				renderer.setSize(width, height, true);
+				document.body.appendChild(renderer.domElement);
+
+				renderer.setClearColor(0xA1A1A1);
+
+				renderer.shadowMap.enabled = true;
+				renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+				//______________________________________________________________________________
+
+
+				//______________________________________________________________________________
+
+				// C U B E
+				var geometry = new THREE.BoxGeometry(1, 6, 1);
+				var material = new THREE.MeshStandardMaterial({
+					color: 0xff0051,
+					shading: THREE.FlatShading,
+					metalness: 0,
+					roughness: 1
+				});
+				var cube = new THREE.Mesh(geometry, material);
+
+				cube.castShadow = true;
+				cube.receiveShadow = true;
+				cube.position.set(0, 5, 0);
+
+				scene.add(cube);
+				//______________________________________________________________________________
+
+				// G R I D                                                     
+				var size = 100;
+				var divisions = 300;
+				var grid = new THREE.GridHelper(size, divisions);
+				grid.position.set(0, -1, 0);
+				scene.add(grid);
+				//______________________________________________________________________________
+
+				// P O L A R   G R I D
+				var helper = new THREE.PolarGridHelper(10, 16, 8, 64);
+				scene.add(helper);
+				//______________________________________________________________________________
+				
+				newGltfFile('3dmodels/bakePool/5.gltf', 0, 0, 0);
+				newGltfFile('3dmodels/bakePool/6.gltf', 63, 0, 0);
+				newGltfFile('3dmodels/bakePool/3.gltf', 63, 0, 63);
+				newGltfFile('3dmodels/bakePool/lamp.gltf', 0, 63, 0);
+				newGltfFile('3dmodels/bakePool/4.gltf', -63, 0, 0);
+				newGltfFile('3dmodels/bakePool/1.gltf', -63, 0, 63);
+				newGltfFile('3dmodels/bakePool/2.gltf', 0, 0, 63);
+				newGltfFile('3dmodels/bakePool/9.gltf', 63, 0, -63);
+				newGltfFile('3dmodels/bakePool/7.gltf', -63, 0, -63);
+				newGltfFile('3dmodels/bakePool/plant.gltf', -4, 62, -32);
+				newGltfFile('3dmodels/bakePool/8.gltf', 0, 0, -63);
+				newGltfFile('3dmodels/bakePool/apartment.gltf', 0, 0, -126);
+			
+
+				// _____________________________________________________________________________
+
+				// L I N E
+				var material1 = new THREE.LineBasicMaterial({ color: 0x0000ff });
+				var geometry = new THREE.Geometry();
+				geometry.vertices.push(new THREE.Vector3(-10, 0, -20));
+				geometry.vertices.push(new THREE.Vector3(8, 5, -5));
+				geometry.vertices.push(new THREE.Vector3(10, 0, 0));
+				geometry.vertices.push(new THREE.Vector3(30, -40, -40));
+
+				var line = new THREE.Line(geometry, material1);
+				scene.add(line);
+				// _____________________________________________________________________________
+
+				// L I G H T S
+				var lights = [];
+				lights[0] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[1] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[2] = new THREE.PointLight(0xffffff, 2, 200, 2);
+
+				lights[0].position.set(-50, 60, -50);
+				lights[1].position.set(0, 60, 0);
+				lights[2].position.set(50, 60, 50);
+
+				lights[0].castShadow = true;
+				lights[0].shadow.mapSize.width = 1024;
+				lights[0].shadow.mapSize.height = 1024;
+
+				scene.add(lights[0]);
+				scene.add(lights[1]);
+				scene.add(lights[2]);
+
+				lights[3] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[4] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[5] = new THREE.PointLight(0xffffff, 2, 200, 2);
+				lights[3].position.set(50, 60, -50);
+				lights[4].position.set(0, 10, 0);
+				lights[5].position.set(-50, 60, 50);
+				scene.add(lights[3]);
+				scene.add(lights[4]);
+				scene.add(lights[5]);
+
+
+
+
+
+				var sphereSize = 1;
+				var pointLightHelper = new THREE.PointLightHelper(lights[0], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[1], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[2], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[3], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[4], sphereSize);
+				scene.add(pointLightHelper);
+
+				var pointLightHelper = new THREE.PointLightHelper(lights[5], sphereSize);
+				scene.add(pointLightHelper);
+
+	var amLight = new THREE.AmbientLight( 0x404040 ); 
+	scene.add(amLight);
+
+				// _____________________________________________________________________________
+
+
+				// C A M E R A
+				camera.position.set(0, 40, 40);
+				// camera.lookAt(new THREE.Vector3( 0, 0, 0 ));
+				//______________________________________________________________________________
+
+				// A N I M A T E
+				var animate = function () {
+					requestAnimationFrame(animate);
+
+					if (left) {
+						camera.position.x -= 0.6;
+					}
+					if (right) {
+						camera.position.x += 0.6;
+					}
+					if (up) {
+						camera.position.z -= 0.6;
+					}
+					if (down) {
+						camera.position.z += 0.6;
+					}
+
+
+					cube.rotation.x += 0.1;
+					cube.rotation.y += 0.05;
+
+					// lightShow();
+
+					renderer.render(scene, camera);
+				};
+
+				animate();
+				//______________________________________________________________________________
+
+				// C O N T R O L S
+				var controls = new THREE.OrbitControls(camera, renderer.domElement);
+				controls.addEventListener('change', function () { renderer.render(scene, camera); });
+
+//______________________________________________________________________________
+
+			</script>
+		</div>
+		<div class="item4">
+			<div class="btn-group">
+				<button class="button button2">Button</button>
+				<button class="button button2">Button</button>
+				<button class="button button2">Button</button>
+				<button class="button button2">Button</button>
+			</div>
+		</div>
+		<div class="item5">
+			<div class="btn-group">
+				<button class="button button2">Button</button>
+				<button class="button button2">Button</button>
+				<button class="button button2">Button</button>
+				<button class="button button2">Button</button>
+			</div>
+		</div>
+	</body>
+
+</html>

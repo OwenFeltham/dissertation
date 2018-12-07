@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title>Lesson 5 normal text</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+        <!-- #region COMMUNITY SCRIPTS-->
+        <script src="js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+      
+        <script src="js/aframeCommunity/aframe-text-geometry-component.min.js"></script>
+        <script src="js/aframeCommunity/aframe-event-set-component.min.js"></script>
+        <script src="js/aframeCommunity/aframe-animation-component.min.js"></script>
+        <script src="js/aframeCommunity/aframe-gif-shader.min.js"></script>
+      
+        <script src="js/aframeCommunity/aframe-physics-system.min.js"></script>
+        <script src="js/aframeCommunity/aframe-extras.min.js"></script>
+        <!--endregion-->
+      
+        <!-- #region MY SCRIPTS -->
+        <script src="js/myComponents/scaleOnMouse.js"></script>
+        <script src="js/myComponents/scaleOnCollide.js"></script>
+        <script src="js/myComponents/lightOnCollide.js"></script>
+        <script src="js/myComponents/lightOnMouse.js"></script>
+      
+        <script src="js/myComponents/lightOnId.js"></script>
+      
+        <script src="js/myComponents/rectLight.js"></script>
+        <script src="js/myComponents/threee.js"></script>
+        <script src="js/myComponents/textLoader.js"></script>
+      
+        <script src="js/myComponents/changePos.js"></script>
+        <script src="js/myComponents/nrmlText.js"></script>
+        <!-- <script src="js/visibleOnMouse.js"></script> -->
+      
+        <script src="js/onLoadJS/onload.js"></script>
+        <script src="js/onLoadJS/xyz.js"></script>
+
+        <!--endregion-->
+      
+        <link rel="stylesheet" type="text/css" href="css/grid.css">
+      
+        <script src="js/w3codecolor.js"></script>
+      
+      </head>
+
+<body class="grid-container">
+
+    <div id="canvasDiv9">
+        <canvas id="canvas1"></canvas>
+        <canvas id="canvas2"></canvas>
+        <canvas id="canvas3"></canvas>      
+      </div>
+    
+  <div class="item1">Lesson</div>
+
+  <div class="nav">
+    <ul>
+      <a href="panesConcept.html"><li>Tutorial World</li></a>
+      
+      <a href="experimentalHub.html"><li> Sandbox World</li></a>
+      
+      <a href="Light.html"><li> Learn with Light World</li></a>
+      
+      <a href="Staircases.html"><li> Platform and learn world</li></a>
+      
+      <a href="mainTextPlanes.html"><li> 2D text</li></a>
+
+      <a href="extrudedText.html"><li>  3D text</li></a>
+            
+      <a href="threeJsExperiment.html"><li> THREE js experiment</li></a>
+    </ul>
+  </div>
+
+  <div class="item2">
+
+    <form id="form" onsubmit="return false;">
+      <textarea type="text" id="userInput" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+      <input class="subCode" type="submit" onclick="othername();" />
+    </form>
+
+
+  </div>
+  <div class="item3">
+
+      <script src="js/three.js"></script>
+      <script src="js/OrbitControls.js"></script>
+    
+      <script>
+    
+    // V A R S
+
+        let el = document.querySelector(".item3");
+
+        let width = el.clientWidth;
+        let height = el.clientHeight;
+
+        var size = 256;
+        var canvas1 = document.getElementById('canvas1'), ctx1 = canvas1.getContext('2d');
+        var canvas2 = document.getElementById('canvas2'), ctx2 = canvas2.getContext('2d');
+        var canvas3 = document.getElementById('canvas3'), ctx3 = canvas3.getContext('2d');
+    
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    
+        var renderer = new THREE.WebGLRenderer( { antialias: true } );
+    //______________________________________________________________________________
+    
+    // R E N D E R E R
+        renderer.setSize(width, height, true);
+        document.body.appendChild(renderer.domElement);
+        
+        renderer.setClearColor( 0xA1A1A1 );
+    
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    //______________________________________________________________________________
+    
+    // W H A T   G O E S   O N   T H E   C A N V A S
+        function changeCanvas() {
+        ctx1.font = '20pt Arial';
+        ctx1.fillStyle = 'red';
+        ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
+        ctx1.fillStyle = 'white';
+        ctx1.fillRect(10, 10, canvas1.width - 20, canvas1.height - 20);
+        ctx1.fillStyle = 'black';
+        ctx1.textAlign = "center";
+        ctx1.textBaseline = "middle";
+        ctx1.fillText("AAAAAAAAAAAAA", canvas1.width / 2, canvas1.height / 2);
+        }
+    
+        function changeCanvas2() {
+        ctx2.font = '20pt Arial';
+        ctx2.fillStyle = 'red';
+        ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
+        ctx2.fillStyle = 'white';
+        ctx2.fillRect(10, 10, canvas2.width - 20, canvas2.height - 20);
+        ctx2.fillStyle = 'black';
+        ctx2.textAlign = "center";
+        ctx2.textBaseline = "middle";
+        ctx2.fillText("B2BBBBBBBBBBBB", canvas2.width / 2, canvas2.height / 2);
+        }
+    
+        function changeCanvas3() {
+        ctx3.font = '20pt Arial';
+        ctx3.fillStyle = 'red';
+        ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
+        ctx3.fillStyle = 'white';
+        ctx3.fillRect(10, 10, canvas3.width - 20, canvas3.height - 20);
+        ctx3.fillStyle = 'black';
+        ctx3.textAlign = "center";
+        ctx3.textBaseline = "middle";
+        ctx3.fillText("C3CCCCCCCCCCCC", canvas3.width / 2, canvas3.height / 2);
+        }
+    //______________________________________________________________________________
+    
+    // G E O M E T R Y   W I T H   C A N V A S
+        var texture = new THREE.Texture(canvas1);
+        var material = new THREE.MeshBasicMaterial({ map: texture });
+        geometry = new THREE.BoxGeometry( 2, 2, 2 );
+        mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+        canvas1.width = canvas1.height = size;
+    
+        var texture2 = new THREE.Texture(canvas2);
+        var material2 = new THREE.MeshBasicMaterial({ map: texture2 });
+        var geometry2 = new THREE.PlaneGeometry(50, 50, 50, 50);
+        var plane3 = new THREE.Mesh( geometry2, material2);
+        material2.side = THREE.DoubleSide;
+        plane3.rotateX(-0.5);
+        plane3.position.set(0, 0, -30);
+        scene.add(plane3); 
+        canvas2.width = canvas2.height = size;
+    
+        var texture3 = new THREE.Texture(canvas3);
+        var material3 = new THREE.MeshBasicMaterial({ map: texture3 });
+        var geometry3 = new THREE.PlaneGeometry(50, 50, 50, 50);
+        var plane4 = new THREE.Mesh( geometry3, material3);
+        material3.side = THREE.DoubleSide;
+        plane4.rotateX(-0.5);
+        plane4.position.set(0, 0, -50);
+        scene.add(plane4); 
+        canvas3.width = canvas3.height = size;
+    
+    //______________________________________________________________________________
+    
+    // P L A N E S
+        var plane = new THREE.Mesh( 
+          new THREE.PlaneGeometry(5, 5, 5, 5),
+          new THREE.MeshBasicMaterial({ color: 0x222222, wireframe: true })
+        );
+        plane.rotateX(Math.PI / 2);
+        scene.add(plane); 
+    
+        var x;
+        var plane2 = new THREE.Mesh( 
+              new THREE.PlaneGeometry(30, 30, 30, 30),
+          x = new THREE.MeshBasicMaterial({ color: 0xC0C0C0, shading: THREE.FlatShading, wireframe: false })
+        );
+        x.side = THREE.DoubleSide
+        plane2.receiveShadow = true;
+    
+        plane2.rotateX(Math.PI / 2);
+        plane2.position.set(3, 0, 3);
+        scene.add(plane2); 
+    //______________________________________________________________________________
+    
+    // C U B E
+        var geometry = new THREE.BoxGeometry(1, 1, 1);   
+        var material = new THREE.MeshStandardMaterial( {
+            color: 0xff0051,
+            shading: THREE.FlatShading, 
+            metalness: 0,
+            roughness: 1
+            } );
+        var cube = new THREE.Mesh(geometry, material);
+       
+        cube.castShadow = true;
+        cube.receiveShadow = true;
+        cube.position.set(0, 5, 0);
+    
+        scene.add(cube); 
+    //______________________________________________________________________________
+    
+    // S P H E R E
+        var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+        var material = new THREE.MeshStandardMaterial( {
+        color: 0xff0051,
+        shading: THREE.FlatShading, 
+        metalness: 0,
+        roughness: 1
+        } );
+        var sphere = new THREE.Mesh( geometry, material );
+        sphere.position.set(0, 10, 15);
+        scene.add( sphere );
+    // _____________________________________________________________________________
+    
+    // L I N E
+        var material1 = new THREE.LineBasicMaterial({ color: 0x0000ff });
+        var geometry = new THREE.Geometry();
+        geometry.vertices.push(new THREE.Vector3(-10, 0, -20));
+        geometry.vertices.push(new THREE.Vector3(8, 5, -5));
+        geometry.vertices.push(new THREE.Vector3(10, 0, 0));
+        geometry.vertices.push(new THREE.Vector3(30, -40, -40));
+        
+        var line = new THREE.Line(geometry, material1);
+        scene.add(line);
+    // _____________________________________________________________________________
+    
+    // L I G H T S
+        var lights = [];
+        lights[0] = new THREE.PointLight(0xffffff, 1, 0);
+        lights[1] = new THREE.PointLight(0xffffff, 1, 0);
+        lights[2] = new THREE.PointLight(0xffffff, 1, 0);
+    
+        lights[0].position.set(0, 200, 0);
+        lights[1].position.set(8, 5, 0);
+        lights[2].position.set(- 100, - 200, - 100);
+    
+        lights[0].castShadow = true;
+        lights[0].shadow.mapSize.width = 1024;
+        lights[0].shadow.mapSize.height = 1024;   
+    
+        scene.add(lights[0]);
+        scene.add(lights[1]);
+        scene.add(lights[2]);
+    // _____________________________________________________________________________
+    
+    // C A M E R A
+        camera.position.set(40, 40, 40);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+    //______________________________________________________________________________
+    
+    // A N I M A T E
+        var animate = function () {
+          requestAnimationFrame(animate);
+    
+          changeCanvas();
+          changeCanvas2();
+          changeCanvas3();
+    
+          texture.needsUpdate = true;
+    
+          cube.rotation.x += 0.001;
+          cube.rotation.y += 0.002;
+    
+          renderer.render(scene, camera);
+        };
+    
+        animate();
+    //______________________________________________________________________________
+    
+    // C O N T R O L S
+        var controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.addEventListener('change', function () { renderer.render(scene, camera); });
+    //______________________________________________________________________________
+    
+      </script>
+
+  </div>
+
+  <div class="item4">      
+    <div class="btn-group">
+      <button class="button button2">Button</button>
+      <button class="button button2">Button</button>
+      <button class="button button2">Button</button>
+      <button class="button button2">Button</button>
+    </div>
+  </div>
+
+  <div class="item5">
+      <div class="btn-group">
+          <button class="button button2">Button</button>
+          <button class="button button2">Button</button>
+          <button class="button button2">Button</button>
+          <button class="button button2">Button</button>
+        </div>
+  </div>
+
+</body>
+
+</html>
