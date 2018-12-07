@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Learn with Light</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+		<link href="https://fonts.googleapis.com/css?family=Atomic+Age|Cinzel|Coming+Soon|
+		Cormorant+SC|Cutive+Mono|Josefin+Sans:100|Julius+Sans+One|Mountains+of+Christmas|
+		Nixie+One|Nosifer|Playfair+Display+SC|Suez+One|Quicksand|Space+Mono|Rubik+Mono+One|Vast+Shadow"
+		 rel="stylesheet">
+		<!-- #region COMMUNITY SCRIPTS-->
+		<script src="js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+		<script src="js/aframeCommunity/aframe-text-geometry-component.min.js"></script>
+		<script src="js/aframeCommunity/aframe-event-set-component.min.js"></script>
+		<script src="js/aframeCommunity/aframe-gif-shader.min.js"></script>
+		<script src="js/aframeCommunity/aframe-physics-system.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+		<!--endregion-->
+		<!-- #region MY SCRIPTS -->
+		<script src="js/onLoadJS/onload2.js"></script>
+		<script src="js/onLoadJS/player.js"></script>
+		<!-- endregion -->
+		<link rel="stylesheet" type="text/css" href="css/COLORgrid.css">
+	</head>
+
+	<body>
+		<!-- ______________________________________O N E -->
+		<div class="grid-container">
+			<!-- #region C A N V A S E S -->
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas2" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<!-- endregion -->
+			<a href="../index.html"><div class="header">Javascript 3D Experiments</div></a>
+			<!-- #region N A V B A R -->
+			<div class="nav"><ul>
+				<a href="../index.html">
+					<li class="buttonS" >Home</li>
+				</a>
+				<a href="../5_staircases/StaircasesPly.html">
+					<li class="buttonS">1. &nbspStaircases and Collision</li>
+				</a>
+				<a href="Light.html">
+					<li class="current">2.&nbsp Learn with Light</li>
+				</a>
+				<a href="../7_threeExperiment/threeJsExperiment.html">
+					<li class="buttonS">3. &nbspTHREE js experiment</li>
+				</a>
+				<a href="../1_panesConcept/panesConcept.html">
+					<li class="buttonS">4. &nbspPanes Concept</li>
+				</a>
+				<a href="../2_extrudedText/extrudedText.html">
+					<li class="buttonS">5. &nbspExtruded Text</li>
+				</a>
+				<a href="../3_experimentalHub/experimentalHub.html">
+					<li class="buttonS">6. &nbspExperimental Hub</li>
+				</a>
+				<a href="../4_mainTextPlanes/mainTextPlanes.html">
+					<li class="buttonS">7. &nbspMain Text Panes</li>
+				</a>
+				</ul>
+			</div>
+			<!-- endregion -->
+
+			<!-- #region P A N E   W O R L D   C O N T R O L  -->
+			<div class="ctrlWhite">
+				<p>Fly on or off</p>
+			</div>
+			<div class="ctrlGreen">
+				<p>Pointer lock</p>
+			</div>
+			<div class="ctrlPink">
+				<p>Reset player position</p>
+			</div>
+			<div class="ctrlYellow">
+				<p>Physics hitbox lines on</p>
+			</div>
+			<div class="ctrlBlue">
+					<p>Physics hitbox lines off</p>
+			</div>
+			<!-- endregion-->
+
+
+  <div class="VR">
+
+    <a-scene embedded physics="debug: false" light="defaultLightsEnabled: false" antialias="true">
+
+      <!-- #region A S S E T S      -->
+
+            <a-assets>
+              <img id="grid" src="../assets/images/grid.png">
+              <img id="grain" src="../assets/images/grain.png">
+              <a-mixin id="red" material="color: red"></a-mixin>
+              <canvas id="myCanvas" crossorigin="anonymous"></canvas>
+
+              <a-asset-item id="tree-obj" src="../assets/3DModels/untitled.obj"></a-asset-item>
+              <a-asset-item id="tree-mtl" src="../assets/3DModels/untitled.mtl"></a-asset-item>
+
+              <a-asset-item id="spi" src="../assets/3DModels/stairs-1.obj"></a-asset-item>
+              <a-asset-item id="spi" src="../assets/3DModels/stairs-1.mtl"></a-asset-item>
+
+              <a-asset-item id="unt" src="../assets/3DModels/X.obj"></a-asset-item>
+              <a-asset-item id="unt" src="../assets/3DModels/X.mtl"></a-asset-item>
+
+
+            </a-assets>
+
+      <!-- endregion -->
+
+      <!-- #region W O R L D        -->
+			<a-sky color="black"></a-sky>
+			<a-plane visible="true" position="0 -0.181 0 " rotation="-90 0 0" width="500" height="500" shadow="recieve: true; cast: true"
+			 static-body material="src: #grain; repeat: 100 100"></a-plane>
+      <!-- endregion basic world -->
+
+      <!-- #region P L A Y E R      -->
+      <a-entity id="rig" movement-controls="speed: 0.7" kinematic-body position="50 70 50" jump-ability="maxJumps: 50">
+        <a-entity camera position="0 5 0" look-controls="pointerLockEnabled: true">
+        <a-entity id="spotlightP" light="type: spot; angle: 30; penumbra: 1; decay: 5; intensity: 0.75; castShadow: true" rotation="0 0 0" position="0 0 0"></a-entity>
+
+        </a-entity>
+      </a-entity>
+
+      <!--endregion-->
+
+      <!-- #region L I G H T S      -->
+
+            <!-- <a-entity id="point" light="type=:point; position: -6.899 1 7.895; color: white; intensity: 0.3" rotation="-10 5 40" light-on-mouseenter="to: "
+              light-on-mouseleave="to: "></a-entity>
+            <a-box scale="1 1 1"></a-box>
+            </a-entity>
+
+            <a-entity id="spotlight" light="type: spot; angle: 10; penumbra: 0.4; intensity: 5; castShadow: true" light-on-mouseenter="to: "
+              light-on-mouseleave="to: " position="-30 0 0">
+              <a-box scale="1 5 1">
+              </a-box>
+            </a-entity>
+
+            <a-entity id="hemisphere" light="type: hemisphere; color: white; groundColor: white; intensity: 0.5" position="0 90 0">
+              <a-sphere scale="10 10 10"></a-sphere>
+            </a-entity>
+
+            <a-entity id="dirToMid" light="type: directional; intensity: 0.01" position="-3030 20 -3030" rotation="-90 0 0" target="#directionaltarget">
+              <a-entity id="directionaltarget" position="0 0 -1"></a-entity>
+              <a-sphere scale="100 100 100"></a-sphere>
+            </a-entity> -->
+
+      <!-- endregion -->
+
+      <!-- #region G E O M E T R Y  -->
+
+      <!-- endregion-->
+
+      <!-- #region T H E   T E X T  -->
+
+            <a-entity id="teext" text-geometry="value: {{newCode}}" pos visible="true" rotation="-36 0 0" shadow="recieve: true; cast: true"
+              scale="15 15 15" position="-40 27 51" material="color:white"
+              event-set__enter="_event: mouseenter; text-geometry.value: eeeeeeeeeeee"
+              event-set__leave="_event: mouseleave; text-geometry.value: Z Z Z Z Z ZZ">
+            </a-entity>
+
+      <!-- endregion -->
+
+          </a-scene>
+
+	</div>
+
+
+
+			<!-- #region   B U T T O N S    (R I G H T   S I D E )    -->
+			<div class="rightSideButtons">
+				<div class="btn-group">
+				</div>
+			</div>
+			<!-- endregion -->
+			<!-- #region   B U T T O N S    (T E X T   P L A N E S )  -->
+			<div class="textSlider1">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider2">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider3">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<!-- endregion -->
+		</div>
+		<!-- ______________________________________T W O -->
+		<div class="grid-container2">
+			<!-- #region   P L A Y E R   C O N T R O L S             -->
+			<div class="fovText">
+				<p>FOV: <span id="fovState"></span>
+				</p>
+			</div>
+			<div class="movText">
+				<p>Movement speed: <span id="moveState"></span>
+			</div>
+			<div class="hudText">
+				<p id="hud">ON</p>
+			</div>
+			<div class="opaText">
+				<p>Hud opacity: <span id="hudState"></span>
+				</p>
+			</div>
+			<div class="fov">
+				<input type="range" min="1" max="120" value="90" class="slider" id="myRange">
+				<p>
+					<span id="fovState"></span>
+				</p>
+			</div>
+			<div class="mov">
+				<input type="range" min="1" max="5" value="1" class="slider" id="movSlider">
+				<p>
+					<span id="moveState"></span>
+			</div>
+			<div class="torch">
+				<button class="button button2" onclick="toggleTorch();">Toggle torch</button>
+				<p id="onOffTorch"></p>
+			</div>
+			<div class="hudOnOff">
+				<button class="button button2" onclick="hudOnOff();">HUD</button>
+				<p id="hud"></p>
+			</div>
+			<div class="hudOpa">
+				<input type="range" min="0" max="100" value="16" class="slider" id="hudSlider">
+				<p>
+					<span id="hudState"></span>
+				</p>
+			</div>
+			<!-- endregion -->
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>2D Text visualiser</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://fonts.googleapis.com/css?family=Atomic+Age|Cinzel|Coming+Soon|
+		Cormorant+SC|Cutive+Mono|Josefin+Sans:100|Julius+Sans+One|Mountains+of+Christmas|
+		Nixie+One|Nosifer|Playfair+Display+SC|Suez+One|Quicksand|Space+Mono|Rubik+Mono+One|Vast+Shadow"
+		 rel="stylesheet">
+		<!-- #region COMMUNITY SCRIPTS-->
+		<script src="js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+		<script src="js/aframeCommunity/aframe-event-set-component.min.js"></script>
+		<script src="js/aframeCommunity/aframe-animation-component.min.js"></script>
+		<script src="js/aframeCommunity/aframe-extras.min.js"></script>
+		<!--endregion-->
+		<!-- #region MY SCRIPTS -->
+		<script src="js/myComponents/myIntersect.js"></script>
+		<script src="js/onLoadJS/onload2dText.js"></script>
+		<script src="js/onLoadJS/player.js"></script>
+		<script src="/bulma/bulma-slider-master/dist/js/bulma-slider.min.js"></script>
+		<!-- endregion -->
+		<link rel="stylesheet" type="text/css" href="/bulma/bulma-slider-master/dist/css/bulma-slider.min.css">
+		<link rel="stylesheet" type="text/css" href="css/COLORgrid.css">
+	</head>
+
+	<body>
+		<!-- ______________________________________O N E -->
+		<div class="grid-container">
+			<!-- #region C A N V A S E S -->
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas2" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<!-- endregion -->
+			<a href="../index.html"><div class="header">Javascript 3D Experiments</div></a>
+			<!-- #region N A V B A R -->
+			<div class="nav">
+				<ul>
+					<a href="../index.html">
+						<li class="buttonS">Home</li>
+					</a>
+					<a href="../5_staircases/StaircasesPly.html">
+						<li class="buttonS">1. &nbspStaircases and Collision</li>
+					</a>
+					<a href="../6_light/Light.html">
+						<li class="buttonS">2.&nbsp Learn with Light</li>
+					</a>
+					<a href="../7_threeExperiment/threeJsExperiment.html">
+						<li class="buttonS">3. &nbspTHREE js experiment</li>
+					</a>
+					<a href="../1_panesConcept/panesConcept.html">
+						<li class="buttonS">4. &nbspPanes Concept</li>
+					</a>
+					<a href="../2_extrudedText/extrudedText.html">
+						<li class="buttonS">5. &nbspExtruded Text</li>
+					</a>
+					<a href="../3_experimentalHub/experimentalHub.html">
+						<li class="buttonS">6. &nbspExperimental Hub</li>
+					</a>
+					<a href="mainTextPlanes.html">
+						<li class="current">7. &nbspMain Text Panes</li>
+					</a>
+				</ul>
+			</div>
+			<!-- endregion -->
+			<!-- #region P A N E   W O R L D   C O N T R O L  -->
+			<div class="ctrlWhite">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderWhite">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderYWhite">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZWhite">
+				<input type="range" min="0" max="20" value="0" class="slider" id="ctrlWSliderScaleWhite">
+			</div>
+			<div class="ctrlGreen">
+				<input type="range" min="-2000" max="2000" value="0" class="slider" id="ctrlWSlider">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderY">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZ">
+				<input type="range" min="1" max="20" value="0" class="slider" id="ctrlWSliderScale">
+			</div>
+			<div class="ctrlPink">
+				<input type="range" min="-2000" max="2000" value="0" class="slider" id="ctrlWSliderPink">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderYPink">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZPink">
+				<input type="range" min="1" max="20" value="0" class="slider" id="ctrlWSliderScalePink">
+			</div>
+			<div class="ctrlYellow">
+				<input type="range" min="-2000" max="2000" value="0" class="slider" id="ctrlWSliderYellow">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderYYellow">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZYellow">
+				<input type="range" min="1" max="20" value="0" class="slider" id="ctrlWSliderScaleYellow">
+			</div>
+			<div class="ctrlBlue">
+				<input type="range" min="-2000" max="2000" value="0" class="slider" id="ctrlWSliderBlue">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderYBlue">
+				<input type="range" min="-6000" max="6000" value="0" class="slider" id="ctrlWSliderZBlue">
+				<input type="range" min="1" max="20" value="0" class="slider" id="ctrlWSliderScaleBlue">
+			</div>
+			<!-- endregion-->
+			<!-- #region F O R M -->
+			<div class="textPlane1">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<div class="textPlane2">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput2" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<div class="textPlane3">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput3" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<div class="textPlane4">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput4" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<div class="textPlane5">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput5" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+				</form>
+			</div>
+			<!-- endregion-->
+			<div class="VR">
+				<a-scene id="scene" embedded physics="debug: false" light="defaultLightsEnabled: false" antialias="false">
+					<!-- #region A S S E T S      -->
+					<a-assets>
+						<img id="grid" src="../assets/images/grid.png">
+						<img id="grain" src="../assets/images/grain.png">
+						<img id="grey" src="../assets/images/greySky.png">
+						<!-- <sound id="NINA" src="NINA - Your Truth.wav" preload="auto"></sound>
+        <sound id="eight" src="eight.wav" preload="auto"></sound> -->
+						<a-mixin id="red" material="color: red"></a-mixin>
+						<canvas id="myCanvas" crossorigin="anonymous"></canvas>
+						<canvas id="myCanvas2" crossorigin="anonymous"></canvas>
+					</a-assets>
+					<!-- endregion -->
+					<!-- #region W O R L D        -->
+					<a-sky color="#6EBAA7"></a-sky>
+					<!-- GROUND___________________________________________________________ -->
+					<a-plane id="ground" visible="true" reehee position="0 0 -1500" rotation="0 0 0" width="5" height="5"></a-plane>
+					<a-entity id="gridHelper1" position="0 1220 -1500" rotation="0 0 0"></a-entity>
+					<a-entity id="gridHelper2" position="0 -1200 -1500" rotation="0 0 0"></a-entity>
+					<!-- endregion basic world -->
+					<!-- #region P L A Y E R      -->
+					<!-- ________________________________________________________ CAMERA -->
+					<a-entity id="player" camera="fov: 90" look-controls="pointerLockEnabled: true" wasd-controls="acceleration: 2000; fly: true;"
+					 position="0 500 -3000" rotation="0 0 0">
+						<!-- _______________________________________________SECOND RAYCASTER -->
+						<a-entity id="raycaster2" raycaster="showLine: true; far: 10000; near: 10 " line="color: red; opacity: 1" lazer
+						 position="0 -1 0"></a-entity>
+						<!-- ________________________________________________________ CUSROR -->
+						<a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.1" geometry="primitive: ring" scale="0.001 0.001 0.001"
+						 material="color: white; shader: flat"></a-entity>
+						<!-- ___________________________________________________________ ARM -->
+						<a-box scale="0.5014227981791224 0.133 4.842047220426898" color="red" static-body="sphereRadius:NaN" shadow="recieve: true; cast: true"
+						 position="-0.69297045021367 -0.35 -2.1901775419154057"></a-box>
+						<a-text id="curvedHUD" height="3" transparent="true" alpha-test="1" width="3" position="-0.33 1.9 -2.13" value="up"
+						 rotation="0 0 0" text=""></a-text>
+						<a-entity id="spotlightP" light="type: spot; angle: 30; penumbra: 0.4; decay: 0.1; intensity: 0.5; castShadow: true"
+						 position="0 0 0"></a-entity>
+					</a-entity>
+					<!--endregion-->
+					<!-- #region L I G H T S      -->
+					<a-entity id="spotlightP" light="type: spot; angle: 180; penumbra: 0.4; decay: 0.1; intensity: 0.5; castShadow: true"
+					 position="550 0 3200">
+					</a-entity>
+					<a-entity id="spotlightP" light="type: spot; angle: 180; penumbra: 0.4; decay: 0.1; intensity: 0.5; castShadow: true"
+					 position="550 0 -7000" rotation="180 0 0">
+					</a-entity>
+					<!-- endregion -->
+					<!-- #region T H E   T E X T  -->
+					<!-- O N E   B L A C K -->
+					<a-entity rotation="-20" position="0 -50 0">
+						<a-text value="N O T E S" align="right" position="-371 -11 -13" rotation="-20 0 0" scale="250 250 250" text="side: double"></a-text>
+						<a-text value="1" align="left" scale="50 50 50" blue color="black" text="side: double"></a-text>
+						<a-plane height="500" width="200" material="depthTest: true; depthWrite: false" scale="1 1 1" position="100 0 0"
+						 opacity="0.6" rotation="0 0 0" side="double"></a-plane>
+					</a-entity>
+					<!-- T W O   B L A C K -->
+					<a-entity rotation="-20" position="0 -50 -400">
+						<a-text value="DIRECTION OF JAVASCRIPT COMPILER" align="right" position="-371 -11 -13" rotation="-20 0 0" scale="250 250 250"
+						 text="side: double"></a-text>
+						<a-text value="2" align="left" scale="150 150 150" color="black" text="side: double"></a-text>
+						<a-plane height="500" width="200" material="depthTest: true; depthWrite: false" scale="1 1 1 " position="100 0 0"
+						 opacity="0.6" rotation="0 0 0" side="double"></a-plane>
+					</a-entity>
+					<!-- B L U E -->
+					<a-entity id="BlueX" rotation="-20 180 0" position="0 60 -800">
+						<a-text value="SCOPE" align="right" position="-371 -11 -13" color="#6699ff" rotation="-20 0 0" scale="250 250 250"
+						 text="side: double"></a-text>
+						<a-plane material="depthTest: true; depthWrite: false" height="2000" width="600" scale="1 1 1" position="0 0 0"
+						 opacity="0.6" rotation="0 180 0" side="double" color="blue"></a-plane>
+						<a-plane id="bluePlane" height="800" width="500" blue material="depthTest: true; depthWrite: false" scale="1 1 1 "
+						 position="100 0 10" opacity="0.01" rotation="0 0 0" side="double" color="blue"></a-plane>
+						<a-entity scale="50 50 50" line="start: -15, 0, 0; end: -40 0 0; color: blue"></a-entity>
+						<a-entity scale="50 50 50" line="start: -40, 0, 0; end: -40 10 0; color: blue"></a-entity>
+					</a-entity>
+					<!-- Y E L L O W -->
+					<a-entity id="YellowX" rotation="-20 180 0" position="0 90 -1200">
+						<a-text value="HOISTING" align="right" position="-371 -11 -13" color="#ffff80" rotation="-20 0 0" scale="250 250 250"
+						 text="side: double"></a-text>
+						<a-plane material="depthTest: true; depthWrite: false" height="2000" width="600" scale="1 1 1" position="0 0 0"
+						 opacity="0.6" rotation="180 180 0" side="double" color="yellow"></a-plane>
+						<a-plane id="yellowPlane" height="800" width="500" yellow material="depthTest: true; depthWrite: false" scale="1 1 1 "
+						 position="100 0 10" opacity="0.01" rotation="0 0 0" side="double" color="yellow"></a-plane>
+						<a-entity scale="50 50 50" line="start: -15, 0, 0; end: -40 0 0; color: yellow"></a-entity>
+						<a-entity scale="50 50 50" line="start: -40, 0, 0; end: -40 10 0; color: yellow"></a-entity>
+					</a-entity>
+					<!-- P I N K -->
+					<a-entity id="PinkX" rotation="-20 180 0" position="0 120 -1600">
+						<a-text value="SOURCE CODE" align="right" position="-371 -11 -13" color="pink" rotation="-20 0 0" scale="250 250 250"
+						 text="side: double"></a-text>
+						<a-plane material="depthTest: true; depthWrite: false" height="2000" width="600" scale="1 1 1" position="0 0 0"
+						 opacity="0.6" rotation="0 180 0" side="double" color="pink"></a-plane>
+						<a-plane id="pinkPlane" height="800" width="500" material="depthTest: true; depthWrite: false" scale="1 1 1 "
+						 position="100 0 10" opacity="0.01" rotation="0 0 0" side="double" color="pink"></a-plane>
+						<a-entity scale="50 50 50" line="start: -15, 0, 0; end: -40 0 0; color: pink"></a-entity>
+						<a-entity scale="50 50 50" line="start: -40, 0, 0; end: -40 10 0; color: pink"></a-entity>
+						<a-text value="Paste
+          your
+          source
+          code
+          here" position="-2008 702 3.6"
+						 scale="300 300 300" rotation="0 0 0" color="pink" side="double"></a-text>
+					</a-entity>
+					<!-- G R E E N -->
+					<a-entity id="greenX" rotation="-20 180 0" position="0 150 -2000">
+						<a-text value="THIS" align="right" position="-371 -11 -13" color="#33cc33" rotation="-20 0 0" scale="250 250 250"
+						 text="side: double"></a-text>
+						<a-plane material="depthTest: true; depthWrite: false" height="2000" width="600" scale="1 1 1" position="0 0 0"
+						 opacity="0.6" rotation="0 180 0" side="double" color="green"></a-plane>
+						<a-plane id="greenPlane" height="800" width="500" material="depthTest: true; depthWrite: false" scale="1 1 1"
+						 position="100 0 10" opacity="0.01" rotation="0 0 0" side="double" color="green"></a-plane>
+						<a-entity scale="50 50 50" line="start: -15, 0, 0; end: -40 0 0; color: green"></a-entity>
+						<a-entity scale="50 50 50" line="start: -40, 0, 0; end: -40 10 0; color: green"></a-entity>
+					</a-entity>
+					<!-- W H I T E -->
+					<a-entity id="whiteX" rotation="-20 180 0" position="0 180 -2400">
+						<a-text value="DISSOLVING" align="right" position="-371 -11 -13" rotation="-20 0 0" scale="250 250 250" text="side: double"></a-text>
+						<a-plane material="depthTest: true; depthWrite: false" height="2000" width="1800" scale="1 1 1" position="0 0 0"
+						 opacity="0.6" rotation="0 180 0" side="double" color="white"></a-plane>
+						<a-plane id="whitePlane" height="800" width="500" material="depthTest: true; depthWrite: false" scale="2 2 2"
+						 position="900 0 10" opacity="0.6" rotation="0 0 0" side="double" color="white"></a-plane>
+						<a-entity scale="50 50 50" line="start: -15, 0, 0; end: -40 0 0; color: white"></a-entity>
+						<a-entity scale="50 50 50" line="start: -40, 0, 0; end: -40 10 0; color: white"></a-entity>
+					</a-entity>
+					<!-- T H R E E   B L A C K -->
+					<a-entity rotation="-20" position="0 -50 -2800">
+						<a-text value="FUNCTION COMES FROM WHERE" align="right" position="-371 -11 -13" rotation="-20 0 0" scale="250 250 250"
+						 text="side: double"></a-text>
+						<a-text value="3" align="left" scale="150 150 150" color="black" text="side: double"></a-text>
+						<a-plane height="500" width="200" material="depthTest: true; depthWrite: false" scale="1 1 1" position="100 0 0"
+						 opacity="0.6" rotation="0 0 0" side="double"></a-plane>
+					</a-entity>
+					<!-- F O U R   B L A C K -->
+					<a-entity rotation="-20" position="0 -50 -3200">
+						<a-text value="X" align="right" position="-20 240 -3200" rotation="-371 -11 -13" scale="250 250 250" text="side: double"></a-text>
+						<a-text value="4" align="left" scale="150 150 150" color="black" text="side: double"></a-text>
+						<a-plane height="500" width="200" material="depthTest: true; depthWrite: false" scale="1 1 1" position="100 0 0"
+						 opacity="0.6" rotation="0 0 0" side="double"></a-plane>
+					</a-entity>
+					<!-- endregion -->
+				</a-scene>
+			</div>
+			<!-- #region   B U T T O N S    (T E X T   P L A N E S )  -->
+			<div class="textSlider1">
+				<button class="buttonB button2" onclick="textWhite();">
+					<p class="updown">
+						< UPDATE <</p> </button> </div> <div class="textSlider2">
+							<button class="buttonB button2" onclick="textGreen();">
+								<p class="updown">
+									< UPDATE <</p> </button> </div> <div class="textSlider3">
+										<button class="buttonB button2" onclick="textPink();">
+											<p class="updown">
+												< UPDATE <</p> </button> </div> <div class="textSlider4">
+													<button class="buttonB button2" onclick="textYellow();">
+														<p class="updown">
+															< UPDATE <</p> </button> </div> <div class="textSlider5">
+																<button class="buttonB button2" onclick="textBlue();">
+																	<p class="updown">
+																		< UPDATE <</p> </button> </div> <!-- endregion -->
+			</div>
+			<!-- ______________________________________T W O -->
+			<div class="grid-container2">
+				<!-- #region   P L A Y E R   C O N T R O L S             -->
+				<div class="fovText">
+					<p>FOV: <span id="fovState"></span>
+					</p>
+				</div>
+				<div class="movText">
+					<p>Movement speed: <span id="moveState"></span>
+				</div>
+				<div class="zoomText">
+					<p>Zoom: </p>
+				</div>
+				<div class="flyText">
+					<p id="onOff">ON</p>
+				</div>
+				<div class="xzText">
+					<p id="onOffAxis">in out</p>
+				</div>
+				<div class="hudText">
+					<p id="hud">ON</p>
+				</div>
+				<div class="opaText">
+					<p>Hud opacity: <span id="hudState"></span>
+					</p>
+				</div>
+				<div class="fov">
+					<input type="range" min="1" max="120" value="90" class="slider" id="myRange">
+					<p>
+						<span id="fovState"></span>
+					</p>
+				</div>
+				<div class="mov">
+					<input type="range" min="1" max="500000" value="200" class="slider" id="movSlider">
+					<p>
+						<span id="moveState"></span>
+				</div>
+				<div class="zoom">
+					<input type="number" id="myNumber" min="0" max="10" value="1">
+				</div>
+				<div class="torch">
+					<button class="button button2" onclick="toggleTorch();">Toggle torch</button>
+					<p id="onOffTorch"></p>
+				</div>
+				<div class="fly">
+					<button class="button button2" onclick="fly2();">Toggle fly</button>
+					<p id="onOff"></p>
+				</div>
+				<div class="xz">
+					<button class="button button2" onclick="wsAxis();">W S axis</button>
+					<p id="onOffAxis"></p>
+				</div>
+				<div class="hudOnOff">
+					<button class="button button2" onclick="hudOnOff();">HUD</button>
+					<p id="hud"></p>
+				</div>
+				<div class="hudOpa">
+					<input type="range" min="0" max="100" value="16" class="slider" id="hudSlider">
+					<p>
+						<span id="hudState"></span>
+					</p>
+				</div>
+				<!-- endregion -->
+			</div>
+	</body>
+
+</html>

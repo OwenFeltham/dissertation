@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Staircases and Collision</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- #region COMMUNITY SCRIPTS-->
+		<script src="js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+		<script src="js/aframeCommunity/aframe-text-geometry-component.min.js"></script>
+		<script src="js/aframeCommunity/aframe-event-set-component.min.js"></script>
+		<script src="js/aframeCommunity/aframe-animation-component.min.js"></script>
+		<script src="js/aframeCommunity/aframe-gif-shader.min.js"></script>
+		<script src="js/aframeCommunity/aframe-physics-system.min.js"></script>
+		<script src="js/aframeCommunity/aframe-extras.min.js"></script>
+		<!--endregion-->
+		<!-- #region MY SCRIPTS -->
+		<script src="js/myComponents/scaleOnMouse.js"></script>
+		<script src="js/myComponents/scaleOnCollide.js"></script>
+		<script src="js/myComponents/lightOnCollide.js"></script>
+		<script src="js/myComponents/lightOnMouse.js"></script>
+		<script src="js/myComponents/lightOnId.js"></script>
+		<script src="js/myComponents/rectLight.js"></script>
+		<script src="js/myComponents/threee.js"></script>
+		<script src="js/myComponents/textLoader.js"></script>
+		<script src="js/myComponents/newTextPlane.js"></script>
+		<script src="js/myComponents/changePos.js"></script>
+		<script src="js/myComponents/planes/whitePlane.js"></script>
+		<script src="js/myComponents/planes/greenPlane.js"></script>
+		<script src="js/myComponents/planes/pinkPlane.js"></script>
+		<script src="js/myComponents/planes/yellowPlane.js"></script>
+		<script src="js/myComponents/planes/bluePlane.js"></script>
+		<!-- <script src="js/onLoadJS/onload.js"></script>  -->
+		<script src="js/onLoadJS/position.js"></script>
+		<script src="js/onLoadJS/rot.js"></script>
+		<script src="js/onLoadJS/scale.js"></script>
+		<script src="js/onLoadJS/player.js"></script>
+		<script src="js/onLoadJS/createSpider.js"></script>
+		<!-- endregion -->
+		<link rel="stylesheet" type="text/css" href="css/COLORgrid.css">
+	</head>
+
+	<body>
+		<!-- ______________________________________O N E -->
+		<div class="grid-container">
+			<!-- #region C A N V A S E S -->
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas2" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<!-- endregion -->
+			<div class="header">Staircases and Collision</div>
+			<!-- #region N A V B A R -->
+			<div class="nav">
+				<ul>
+					<a href="panesConcept.html">
+						<li>Tutorial World</li>
+					</a>
+					<a href="experimentalHub.html">
+						<li> Sandbox World</li>
+					</a>
+					<a href="Light.html">
+						<li> Learn with Light World</li>
+					</a>
+					<a href="Staircases.html">
+						<li> Platform and learn world</li>
+					</a>
+					<a href="mainTextPlanes.html">
+						<li> 2D text</li>
+					</a>
+					<a href="extrudedText.html">
+						<li> 3D text</li>
+					</a>
+					<a href="threeJsExperiment.html">
+						<li> THREE js experiment</li>
+					</a>
+				</ul>
+			</div>
+			<!-- endregion -->
+			<!-- #region P A N E   W O R L D   C O N T R O L  -->
+			<div class="ctrlWhite">
+			</div>
+			<div class="ctrlGreen">
+			</div>
+			<div class="ctrlPink">
+			</div>
+			<div class="ctrlYellow">
+			</div>
+			<div class="ctrlBlue">
+			</div>
+			<!-- endregion-->
+			<!-- #region F O R M -->
+			<div class="textPlane1">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+					<input class="subCode" type="submit" value="transfer onto plane" />
+				</form>
+			</div>
+			<div class="textPlane2">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput2" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+					<input class="subCode" type="submit" value="transfer onto plane" />
+				</form>
+			</div>
+			<div class="textPlane3">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput3" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+					<input class="subCode" type="submit" value="transfer onto plane" />
+				</form>
+			</div>
+			<div class="textPlane4">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput4" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+					<input class="subCode" type="submit" value="transfer onto plane" />
+				</form>
+			</div>
+			<div class="textPlane5">
+				<form id="form" onsubmit="return false;">
+					<textarea id="userInput5" type="text" cols="120" rows="50" autofocus placeholder="Paste your source code here"></textarea>
+					<input class="subCode" type="submit" value="transfer onto plane" />
+				</form>
+			</div>
+			<!-- endregion-->
+			<div class="VR">
+				<div class="plsHover" style="z-index: 500;">
+					<p>I hope I'm in the scene</p>
+				</div>
+				<a-scene shadow="cast: false" antialias="true" embedded physics="debug: true" light="defaultLightsEnabled: false"
+				 stats-in-vr background="color: black">
+					<!-- #region A S S E T S      -->
+					<a-assets>
+						<a-asset-item id="myModelGltf" src="/assets/trel/untitled.gltf"></a-asset-item>
+						<a-asset-item id="myModelDae" src="/assets/more3DModels/dissertation.dae"></a-asset-item>
+					</a-assets>
+					<!-- endregion -->
+					<!-- #region P L A Y E R      -->
+					<a-entity id="rig" movement-controls="speed: 0.7" kinematic-body position="50 50 50" jump-ability="maxJumps: 50">
+						<a-entity camera position="0 5 0" look-controls="pointerLockEnabled: true"></a-entity>
+						<a-entity light="type: point; intensity: 0.5; distance: 500; decay: 5" position="0 10 0"></a-entity>
+					</a-entity>
+					<!-- endregion -->
+					<!-- #region W O R L D        -->
+					<a-sky color="#a1a1a1"></a-sky>
+					<a-plane visible="true" position="0 -2 0 " rotation="-90 0 0" width="500" height="500" static-body color="#FFC65D"></a-plane>
+					<!-- endregion world -->
+					<!-- #region L I G H T S      -->
+					<a-entity light="type: ambient; color: #CCC"></a-entity>
+					</a-light>
+					<!--endregion-->
+					<!-- #region G E O M E T R Y  -->
+					<a-entity gltf-model="#myModelGltf" body="type: static; shape: mesh;" rotation="0 70 0" position="10 0 -50"
+					 scale="150 100 150"></a-entity>
+					 <a-entity collada-model="#myModelDae" rotation="0 70 0" position="14 0 -50"
+					 scale="1 1 1 "></a-entity>
+					<a-box position="50 30 50" rotation="90 0 0" width="10" height="10" static-body material="color: #696969; roughness: 1; metalness: 0.5"></a-box>
+					<a-sphere position="5.48 10 -38" body="type: dynamic; shape: sphere;" radius="1.25" color="#EF2D5E"></a-sphere>
+					<a-sphere position="4.5 70 -49" body="type: dynamic; shape: sphere; mass: 0.1; linear-damping: 0; angularDamping: 0"
+					 radius="1.25" color="#EF2D5E"></a-sphere>
+					<a-sphere position="0 30 -17" body="type: dynamic; shape: sphere; mass: 2; linear-damping: 0; angularDamping: 0"
+					 radius="1.25" color="#EF2D5E"></a-sphere>
+					<a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+					<!--endregion-->
+				</a-scene>
+			</div>
+			<!-- #region   B U T T O N S    (R I G H T   S I D E )    -->
+			<div class="rightSideButtons">
+				<div class="btn-group">
+					
+				</div>
+			</div>
+			<!-- endregion -->
+			<!-- #region   B U T T O N S    (T E X T   P L A N E S )  -->
+			<div class="textSlider1">
+				<button class="buttonB button2" onclick="fly2();">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider2">
+				<button class="buttonB button2" onclick="fly2();">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider3">
+				<button class="buttonB button2" onclick="fly2();">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider4">
+				<button class="buttonB button2" onclick="fly2();">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider5">
+				<button class="buttonB button2" onclick="fly2();">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<!-- endregion -->
+		</div>
+		<!-- ______________________________________T W O -->
+		<div class="grid-container2">
+			<!-- #region   P L A Y E R   C O N T R O L S             -->
+			<div class="fovText">
+				<p>FOV: <span id="fovState"></span>
+				</p>
+			</div>
+			<div class="movText">
+				<p>Movement speed: <span id="moveState"></span>
+			</div>
+			<div class="zoomText">
+				<p>Zoom: </p>
+			</div>
+			<div class="flyText">
+				<p id="onOff">ON</p>
+			</div>
+			<div class="xzText">
+				<p id="onOffAxis">in out</p>
+			</div>
+			<div class="hudText">
+				<p id="hud">ON</p>
+			</div>
+			<div class="opaText">
+				<p>Hud opacity: <span id="hudState"></span>
+				</p>
+			</div>
+			<div class="fov">
+				<input type="range" min="1" max="120" value="90" class="slider" id="myRange">
+				<p>
+					<span id="fovState"></span>
+				</p>
+			</div>
+			<div class="mov">
+				<input type="range" min="1" max="10000" value="200" class="slider" id="movSlider">
+				<p>
+					<span id="moveState"></span>
+			</div>
+			<div class="zoom">
+				<input type="number" id="myNumber" min="0" max="10" value="1">
+			</div>
+			<div class="torch">
+				<button class="button button2" onclick="toggleTorch();">Toggle torch</button>
+				<p id="onOffTorch"></p>
+			</div>
+			<div class="fly">
+				<button class="button button2" onclick="fly2();">Toggle fly</button>
+				<p id="onOff"></p>
+			</div>
+			<div class="xz">
+				<button class="button button2" onclick="wsAxis();">W S axis</button>
+				<p id="onOffAxis"></p>
+			</div>
+			<div class="hudOnOff">
+				<button class="button button2" onclick="hudOnOff();">HUD</button>
+				<p id="hud"></p>
+			</div>
+			<div class="hudOpa">
+				<input type="range" min="0" max="100" value="16" class="slider" id="hudSlider">
+				<p>
+					<span id="hudState"></span>
+				</p>
+			</div>
+			<!-- endregion -->
+		</div>
+	</body>
+
+</html>
