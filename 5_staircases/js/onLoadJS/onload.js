@@ -22,7 +22,7 @@ window.onload = function () {
 			document.exitPointerLock();
 		}
 
-		//S L I D E R S 
+		// S L I D E R S 
 		var slider = document.getElementById("myRange");
 		var output = slider.value;
 		var view = document.getElementById("fovState");

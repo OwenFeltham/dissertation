@@ -19,6 +19,7 @@ window.onload = function () {
 		} else {
 			scene.addEventListener('loaded', run);
 		}
+
 		function run() {
 			document.getElementById("curvedHUD").setAttribute('material', { opacity: 0.16 });
 			var size = 10000;
@@ -31,11 +32,12 @@ window.onload = function () {
 	})();
 
 	setInterval(function () {
-		shootX = raycasterXYZ.x;
-		shootY = raycasterXYZ.y;
-		shootZ = raycasterXYZ.z;
 
-
+		var fallThrough = document.getElementById("player").getAttribute('position');
+		if (fallThrough.y < -5) {
+			console.log(fallThrough.y);
+			document.getElementById('player').setAttribute('position', { x: 0, y: 10.8, z: 0 });
+		}
 
 		// #region S L I D E R S  ______________________________________________________ 
 		var slider = document.getElementById("myRange");
@@ -255,6 +257,10 @@ window.onload = function () {
 		}
 
 		// #endregion
+	
+		shootX = raycasterXYZ.x;
+		shootY = raycasterXYZ.y;
+		shootZ = raycasterXYZ.z;
 
 	}, 80);
 

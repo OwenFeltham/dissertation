@@ -15,7 +15,7 @@ var shootX;
 var shootY;
 var shootZ;
 
-let raycasterXYZ;
+var raycasterXYZ;
 
 function getPlayerXY() {
   var pxy = document.getElementById("player").getAttribute('position', {});   //      
