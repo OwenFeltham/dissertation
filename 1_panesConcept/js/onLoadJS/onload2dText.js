@@ -25,24 +25,6 @@ window.onload = function() {
     } else {
       scene.addEventListener('loaded', run);
     }
-    function run () {
-
-      document.getElementById("curvedHUD").setAttribute('material', { opacity: 0.16 });  
-      var size = 1000;
-      var divisions = 150;
-      
-      document.getElementById("ground").setObject3D('gh', new THREE.GridHelper( size, divisions )); 
-      document.getElementById("gridHelper1").setObject3D('gh1', new THREE.GridHelper( size, divisions )); 
-      document.getElementById("gridHelper2").setObject3D('gh2', new THREE.GridHelper( size, divisions )); 
-      // var size = 5000;
-      // var divisions = 150;
-      
-      // document.getElementById("ground").setObject3D('gh', new THREE.GridHelper( size, divisions )); 
-      // document.getElementById("gridHelper1").setObject3D('gh1', new THREE.GridHelper( size, divisions )); 
-      // document.getElementById("gridHelper2").setObject3D('gh2', new THREE.GridHelper( size, divisions )); 
-
-    }
-  })();
 
   setInterval(function () {
 
