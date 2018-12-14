@@ -5,23 +5,24 @@
 		<title>Staircases and Collision</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 		<link href="https://fonts.googleapis.com/css?family=Atomic+Age|Cinzel|Coming+Soon|
 		Cormorant+SC|Cutive+Mono|Josefin+Sans:100|Julius+Sans+One|Mountains+of+Christmas|
 		Nixie+One|Nosifer|Playfair+Display+SC|Suez+One|Quicksand|Space+Mono|Rubik+Mono+One|Vast+Shadow"
 		 rel="stylesheet">
 		<!-- #region COMMUNITY SCRIPTS-->
-		<script src="js/aframeCommunity/aframe-v0.8.2.min.js"></script>
-		<script src="js/aframeCommunity/aframe-text-geometry-component.min.js"></script>
-		<script src="js/aframeCommunity/aframe-event-set-component.min.js"></script>
-		<script src="js/aframeCommunity/aframe-animation-component.min.js"></script>
-		<script src="js/aframeCommunity/aframe-gif-shader.min.js"></script>
-		<script src="js/aframeCommunity/aframe-physics-system.min.js"></script>
-		<script src="js/aframeCommunity/aframe-extras.min.js"></script>
+		<script src="/js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+		<script src="/js/aframeCommunity/aframe-text-geometry-component.min.js"></script>
+		<script src="/js/aframeCommunity/aframe-physics-system.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+		<script src="/js/bulma-slider.min.js"></script>
+
 		<!--endregion-->
 		<!-- #region MY SCRIPTS -->
-		<script src="js/onLoadJS/onload.js"></script> 
+		<script src="js/onLoadJS/onload.js"></script>
 		<script src="js/onLoadJS/player.js"></script>
 		<!-- endregion -->
+		<link rel="stylesheet" type="text/css" href="/css/bulma/bulma-slider-master/dist/css/bulma-slider.min.css">
 		<link rel="stylesheet" type="text/css" href="css/COLORgrid.css">
 	</head>
 
@@ -38,31 +39,31 @@
 					the canvas element. </canvas>
 			</div>
 			<!-- endregion -->
-			<div class="header">Javascript 3D Experiments</div>
+			<a href="../index.html"><div class="header">Javascript 3D Experiments</div></a>
 			<!-- #region N A V B A R -->
 			<div class="nav"><ul>
-				<a href="/index.html">
+				<a href="../index.html">
 					<li class="buttonS" >Home</li>
 				</a>
-				<a href="Staircases.html">
+				<a href="StaircasesPly.html">
 					<li class="current">1. &nbspStaircases and Collision</li>
 				</a>
-				<a href="/6_light/Light.html">
+				<a href="../6_light/Light.html">
 					<li class="buttonS">2.&nbsp Learn with Light</li>
 				</a>
-				<a href="/7_threeExperiment/threeJsExperiment.html">
+				<a href="../7_threeExperiment/threeJsExperiment.html">
 					<li class="buttonS">3. &nbspTHREE js experiment</li>
 				</a>
-				<a href="/1_panesConcept/panesConcept.html">
+				<a href="../1_panesConcept/panesConcept.html">
 					<li class="buttonS">4. &nbspPanes Concept</li>
 				</a>
-				<a href="/2_extrudedText/extrudedText.html">
+				<a href="../2_extrudedText/extrudedText.html">
 					<li class="buttonS">5. &nbspExtruded Text</li>
 				</a>
-				<a href="/3_experimentalHub/experimentalHub.html">
+				<a href="../3_experimentalHub/experimentalHub.html">
 					<li class="buttonS">6. &nbspExperimental Hub</li>
 				</a>
-				<a href="/4_mainTextPlanes/mainTextPlanes.html">
+				<a href="../4_mainTextPlanes/mainTextPlanes.html">
 					<li class="buttonS">7. &nbspMain Text Panes</li>
 				</a>
 				</ul>
@@ -87,17 +88,18 @@
 			<!-- endregion-->
 			<div class="VR">
 
-				<a-scene shadow="cast: false" antialias="false" embedded physics="debug: true" light="defaultLightsEnabled: false"
+				<a-scene shadow="cast: false" antialias="true" embedded physics="debug: false" light="defaultLightsEnabled: false"
 				 stats-in-vr background="color: black">
 					<!-- #region A S S E T S      -->
-					<a-assets>
-						<a-asset-item id="myModelObj" src="/assets/more3DModels/temple.obj"></a-asset-item>
-						<a-asset-item id="myModelMtl" src="/assets/more3DModels/temple.mtl"></a-asset-item>
-					</a-assets>
+						<a-assets>
+							<a-asset-item id="myModelPly" src="../assets/more3DModels/templebake.ply"></a-asset-item>
+							<a-asset-item id="myModelObj" src="../assets/more3DModels/temple.obj"></a-asset-item>
+						</a-assets>
+
 					<!-- endregion -->
 					<!-- #region P L A Y E R      -->
-					<a-entity id="rig" movement-controls="speed: 0.4" kinematic-body position="50 50 50" jump-ability="maxJumps: 1">
-						<a-entity camera position="0 5 0" look-controls="pointerLockEnabled: true"></a-entity>
+					<a-entity id="player" movement-controls="speed: 0.2" kinematic-body position="0 0 0" jump-ability="maxJumps: 1; distance: 2">
+						<a-entity camera position="0 2 0" look-controls="pointerLockEnabled: true"></a-entity>
 					</a-entity>
 					<!-- endregion -->
 					<!-- #region W O R L D        -->
@@ -108,14 +110,16 @@
 					<a-entity light="type: ambient; color: #CCC"></a-entity>
 					<!--endregion-->
 					<!-- #region G E O M E T R Y  -->
-					<a-entity obj-model="obj: #myModelObj; mtl: #myModelMtl" body="type: static; shape: mesh;" rotation="0 70 0" position="10 0.5 -50"
-					 scale="1 1 1 "></a-entity>
+					<a-entity ply-model="src: #myModelPly" rotation="-90 70 0" position="10 0 -50"
+					scale="0.4 0.4 0.4"></a-entity>
+					<a-entity obj-model="obj: #myModelObj" visible="false"  body="type: static; shape: mesh;" rotation="0 70 0" position="10 0 -50"
+					 scale="0.4 0.4 0.4 "></a-entity>
+
 					<a-sphere position="5.48 10 -38" body="type: dynamic; shape: sphere;" radius="1.25" color="#EF2D5E"></a-sphere>
 					<a-sphere position="4.5 70 -49" body="type: dynamic; shape: sphere; mass: 0.1; linear-damping: 0; angularDamping: 0"
 					 radius="4" color="#EF2D5E"></a-sphere>
 					<a-sphere position="0 30 -17" body="type: dynamic; shape: sphere; mass: 2; linear-damping: 0; angularDamping: 0"
 					 radius="1.25" color="#EF2D5E"></a-sphere>
-					<a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
 					<!--endregion-->
 				</a-scene>
 
@@ -168,7 +172,7 @@
 				</p>
 			</div>
 			<div class="mov">
-				<input type="range" min="1" max="10000" value="200" class="slider" id="movSlider">
+				<input type="range" min="1" max="5" value="1" class="slider" id="movSlider">
 				<p>
 					<span id="moveState"></span>
 			</div>
@@ -185,6 +189,7 @@
 				<p>
 					<span id="hudState"></span>
 				</p>
+				<input id="sliderWithValue" class="slider has-output is-fullwidth" min="0" max="100" value="50" step="1" type="range">
 			</div>
 			<!-- endregion -->
 		</div>

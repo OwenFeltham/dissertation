@@ -11,7 +11,6 @@ window.addEventListener('keydown', function (key) {
 window.onload = function() {
   
   document.getElementById("scene").addEventListener("click", function sceneClick( event ) {
-     createPlayerLine();
   }, false);
 
   setInterval(function () {
@@ -37,7 +36,7 @@ window.onload = function() {
     }
     
     var refToDOMslider = document.getElementById("hudSlider");
-    let opaNo = refToDOMslider.value;
+    var opaNo = refToDOMslider.value;
     var opaFloat = opaNo / 200;
     var opaLevel = document.getElementById("hudState");
     opaLevel.innerHTML = refToDOMslider.value;
@@ -244,9 +243,9 @@ ctrlNEWScaleYellow.oninput = function () {
 // #region I F  ________________________________________________________________
    
     // console.log(globalx);
-    // console.log(globalLet);
+    // console.log(globalvar);
 
-    // if (globalx < 100 || globalLet < 100) {
+    // if (globalx < 100 || globalvar < 100) {
     //   console.log("____________________________worked");
 
     // } else {

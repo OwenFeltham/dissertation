@@ -197,6 +197,6 @@ function createPlayerLine() {
 
   entityEl.setAttribute('end', { x: shootX, y: shootY, z: shootZ });
   entityEl.setAttribute('start', { x: playerX, y: playerY, z: playerZ});
-\
+
   sceneEl.appendChild(entityEl);
 }

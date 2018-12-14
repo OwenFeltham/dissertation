@@ -99,7 +99,7 @@
 					<!-- endregion -->
 					<!-- #region P L A Y E R      -->
 					<a-entity id="rig" movement-controls="speed: 0.2" kinematic-body position="0 0 0" jump-ability="maxJumps: 1; distance: 2">
-						<a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true"></a-entity>
+						<a-entity id="player" camera position="0 1.6 0" look-controls="pointerLockEnabled: true"></a-entity>
 					</a-entity>
 					<!-- endregion -->
 					<!-- #region W O R L D        -->
@@ -158,13 +158,7 @@
 			<div class="movText">
 				<p>Movement speed: <span id="moveState"></span>
 			</div>
-			<div class="hudText">
-				<p id="hud">ON</p>
-			</div>
-			<div class="opaText">
-				<p>Hud opacity: <span id="hudState"></span>
-				</p>
-			</div>
+		
 			<div class="fov">
 				<input type="range" min="1" max="120" value="90" class="slider" id="myRange">
 				<p>
@@ -176,20 +170,8 @@
 				<p>
 					<span id="moveState"></span>
 			</div>
-			<div class="torch">
-				<button class="button button2" onclick="toggleTorch();">Toggle torch</button>
-				<p id="onOffTorch"></p>
-			</div>
-			<div class="hudOnOff">
-				<button class="button button2" onclick="hudOnOff();">HUD</button>
-				<p id="hud"></p>
-			</div>
-			<div class="hudOpa">
-				<input type="range" min="0" max="100" value="16" class="slider" id="hudSlider">
-				<p>
-					<span id="hudState"></span>
-				</p>
-			</div>
+
+
 			<!-- endregion -->
 		</div>
 	</body>

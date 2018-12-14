@@ -1,3 +1,5 @@
+var t = requestAnimationFrame;
+
 var exitCursor = false;
 
 window.addEventListener('keyup', function (key) {
@@ -12,10 +14,10 @@ window.onload = function () {
 
 	setInterval(function () {
 
-		var fallThrough = document.getElementById("rig").getAttribute('position');
+		var fallThrough = document.getElementById("player").getAttribute('position');
 		if (fallThrough.y < -5) {
 			console.log(fallThrough.y);
-			document.getElementById('rig').setAttribute('position', { x: 0, y: 10.8, z: 0 });
+			document.getElementById('player').setAttribute('position', { x: 0, y: 10.8, z: 0 });
 		}
 
 		if (exitCursor) {
@@ -25,6 +27,7 @@ window.onload = function () {
 		// S L I D E R S 
 		var slider = document.getElementById("myRange");
 		var output = slider.value;
+
 		var view = document.getElementById("fovState");
 		view.innerHTML = slider.value;
 		slider.oninput = function () {
@@ -52,6 +55,6 @@ window.onload = function () {
 			opaLevel.innerHTML = opaFloat;
 		}
 
-	}, 80);
+	}, requestAnimationFrame);
 
 }
