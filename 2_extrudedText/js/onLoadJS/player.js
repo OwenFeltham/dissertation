@@ -12,37 +12,37 @@ function getPlayerXY() {
 //_______________________________________________C R E A T E   M O R E   T E X T
 function textWhite() {
   var input = document.getElementById("userInput").value;
-  document.getElementById("whitePlane").setAttribute('text', { value: input,  });
-  document.getElementById("whitePlane").setAttribute('text', { wrapCount: 140 });
-  document.getElementById("whitePlane").setAttribute('text', { side: 'double'   });  
+  // document.getElementById("whitePlane").setAttribute('text', { value: input,  });
+  // document.getElementById("whitePlane").setAttribute('text', { wrapCount: 140 });
+  // document.getElementById("whitePlane").setAttribute('text', { side: 'double'   });  
 }
 
 function textGreen() {
   var input = document.getElementById("userInput2").value;
-  document.getElementById("greenPlane").setAttribute('text', { value: input,  });  
-  document.getElementById("greenPlane").setAttribute('text', { wrapCount: 140 });
-  document.getElementById("greenPlane").setAttribute('text', { side: 'double'   });  
+  // document.getElementById("greenPlane").setAttribute('text', { value: input,  });  
+  // document.getElementById("greenPlane").setAttribute('text', { wrapCount: 140 });
+  // document.getElementById("greenPlane").setAttribute('text', { side: 'double'   });  
 }
 
 function textPink() {
   var input = document.getElementById("userInput3").value;
-  document.getElementById("pinkPlane").setAttribute('text', { value: input   });
-  document.getElementById("pinkPlane").setAttribute('text', {wrapCount: 140  });
-  document.getElementById("pinkPlane").setAttribute('text', { side: 'double'   });    
+  // document.getElementById("pinkPlane").setAttribute('text', { value: input   });
+  // document.getElementById("pinkPlane").setAttribute('text', {wrapCount: 140  });
+  // document.getElementById("pinkPlane").setAttribute('text', { side: 'double'   });    
 }
 
 function textYellow() {
   var input = document.getElementById("userInput4").value;
-  document.getElementById("yellowPlane").setAttribute('text', { value: input  });
-  document.getElementById("yellowPlane").setAttribute('text', {wrapCount: 140 });
-  document.getElementById("yellowPlane").setAttribute('text', { side: 'double'  });    
+  // document.getElementById("yellowPlane").setAttribute('text', { value: input  });
+  // document.getElementById("yellowPlane").setAttribute('text', {wrapCount: 140 });
+  // document.getElementById("yellowPlane").setAttribute('text', { side: 'double'  });    
 }
 
 function textBlue() {
   var input = document.getElementById("userInput5").value;
-  document.getElementById("bluePlane").setAttribute('text', { value: input   });
-  document.getElementById("bluePlane").setAttribute('text', {wrapCount: 140  });
-  document.getElementById("bluePlane").setAttribute('text', { side: 'double'   });    
+  // document.getElementById("bluePlane").setAttribute('text', { value: input   });
+  // document.getElementById("bluePlane").setAttribute('text', {wrapCount: 140  });
+  // document.getElementById("bluePlane").setAttribute('text', { side: 'double'   });    
 }
 
 //___________________________________________________________T O G G L E   F L Y
