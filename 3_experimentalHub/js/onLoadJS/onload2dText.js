@@ -1,22 +1,25 @@
-//       ANIMATION FRAME LOOP                                                 88           
-
 let rand1;
 let rand2;
 let rand3;
-
 
 var shootX;
 var shootY;
 var shootZ;
 
+var exitCursor = false;
+
+window.addEventListener('keyup', function (key) {
+	if (key.which == 67) { exitCursor = false; }
+});
+
+window.addEventListener('keydown', function (key) {
+	if (key.which == 67) { exitCursor = true; }
+});
+
 window.onload = function() {
   
   document.getElementById("scene").addEventListener("click", function sceneClick( event ) {
-    // display the current click count inside the clicked div
-    // longBox();
-    
      createPlayerLine();
-
   }, false);
 
 //_________________________________________________________ONCE SCENE HAS LOADED
@@ -28,30 +31,28 @@ window.onload = function() {
       scene.addEventListener('loaded', run);
     }
     function run () {
-
       document.getElementById("curvedHUD").setAttribute('material', { opacity: 0.16 });  
       var size = 1000;
       var divisions = 150;
       
-      document.getElementById("ground").setObject3D('gh', new THREE.GridHelper( size, divisions )); 
-      document.getElementById("gridHelper1").setObject3D('gh1', new THREE.GridHelper( size, divisions )); 
-      document.getElementById("gridHelper2").setObject3D('gh2', new THREE.GridHelper( size, divisions )); 
-      // var size = 5000;
-      // var divisions = 150;
-      
-      // document.getElementById("ground").setObject3D('gh', new THREE.GridHelper( size, divisions )); 
-      // document.getElementById("gridHelper1").setObject3D('gh1', new THREE.GridHelper( size, divisions )); 
-      // document.getElementById("gridHelper2").setObject3D('gh2', new THREE.GridHelper( size, divisions )); 
-
     }
   })();
 
   setInterval(function () {
 
+		var fallThrough = document.getElementById("player").getAttribute('position');
+		if (fallThrough.y < -5) {
+			console.log(fallThrough.y);
+			document.getElementById('player').setAttribute('position', { x: 0, y: 10.8, z: 0 });
+		}
 
-    shootX = raycasterXYZ.x;
-    shootY = raycasterXYZ.y;
-    shootZ = raycasterXYZ.z;
+		if (exitCursor) {
+			document.exitPointerLock();
+		}
+
+    // shootX = raycasterXYZ.x;
+    // shootY = raycasterXYZ.y;
+    // shootZ = raycasterXYZ.z;
 
     rand1 = Math.floor((Math.random() * 500) + 1);
     rand2 = Math.floor((Math.random() * 500) + 1);

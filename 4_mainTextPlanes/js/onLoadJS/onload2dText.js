@@ -1,5 +1,3 @@
-//        ANIMATION FRAME LOOP                                                
-
 var shootX;
 var shootY;
 var shootZ;

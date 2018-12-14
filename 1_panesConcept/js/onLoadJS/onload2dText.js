@@ -1,14 +1,14 @@
-window.onload = function () {
-	
-	var exitCursor = false;
+var exitCursor = false;
 
-	window.addEventListener('keyup', function (key) {
-		if (key.which == 67) { exitCursor = false; }
-	});
-	
-	window.addEventListener('keydown', function (key) {
-		if (key.which == 67) { exitCursor = true; }
-	});
+window.addEventListener('keyup', function (key) {
+	if (key.which == 67) { exitCursor = false; }
+});
+
+window.addEventListener('keydown', function (key) {
+	if (key.which == 67) { exitCursor = true; }
+});
+
+window.onload = function () {
 
 	document.getElementById("scene").addEventListener("click", function sceneClick(event) {
 		// display the current click count inside the clicked div
@@ -19,6 +19,10 @@ window.onload = function () {
 	}, false);
 
 		setInterval(function () {
+
+			if (exitCursor) {
+				document.exitPointerLock();
+			}
 
 			var fallThrough = document.getElementById("player").getAttribute('position');
 			if (fallThrough.y < -5) {

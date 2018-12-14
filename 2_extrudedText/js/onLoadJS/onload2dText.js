@@ -1,10 +1,12 @@
-let rand1;
-let rand2;
-let rand3;
+var exitCursor = false;
 
-var shootX;
-var shootY;
-var shootZ;
+window.addEventListener('keyup', function (key) {
+	if (key.which == 67) { exitCursor = false; }
+});
+
+window.addEventListener('keydown', function (key) {
+	if (key.which == 67) { exitCursor = true; }
+});
 
 window.onload = function() {
   
@@ -12,30 +14,13 @@ window.onload = function() {
      createPlayerLine();
   }, false);
 
-//_________________________________________________________ONCE SCENE HAS LOADED
-  (function () {
-    var scene = document.querySelector('a-scene');
-    if (scene.hasLoaded) {
-      run();
-    } else {
-      scene.addEventListener('loaded', run);
-    }
-    function run () {
-
-
-    }
-  })();
-
   setInterval(function () {
 
-
-    rand1 = Math.floor((Math.random() * 500) + 1);
-    rand2 = Math.floor((Math.random() * 500) + 1);
-    rand3 = Math.floor((Math.random() * 500) + 1);  
+		if (exitCursor) {
+			document.exitPointerLock();
+		}
 
 // #region S L I D E R S  ______________________________________________________ 
-
-
     var nums = document.getElementById("myNumber");
     var numVal = nums.value;
     nums.oninput = function() {

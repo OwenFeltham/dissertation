@@ -193,12 +193,10 @@ function createPlayerLine() {
   entityEl.setAttribute('line', {
     start: { x: playerX, y: playerY, z: playerZ},
     end: { x: shootX, y: shootY, z: shootZ },
-    color: red
   });
 
   entityEl.setAttribute('end', { x: shootX, y: shootY, z: shootZ });
   entityEl.setAttribute('start', { x: playerX, y: playerY, z: playerZ});
-  entityEl.setAttribute('color', {red});
-
+\
   sceneEl.appendChild(entityEl);
 }
