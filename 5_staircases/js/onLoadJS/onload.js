@@ -1,11 +1,11 @@
-var shoot = false;
+var exitCursor = false;
 
 window.addEventListener('keyup', function (key) {
-	if (key.which == 67) { shoot = false; }
+	if (key.which == 67) { exitCursor = false; }
 });
 
 window.addEventListener('keydown', function (key) {
-	if (key.which == 67) { shoot = true; }
+	if (key.which == 67) { exitCursor = true; }
 });
 
 window.onload = function () {
@@ -18,7 +18,7 @@ window.onload = function () {
 			document.getElementById('rig').setAttribute('position', { x: 0, y: 10.8, z: 0 });
 		}
 
-		if (shoot) {
+		if (exitCursor) {
 			document.exitPointerLock();
 		}
 

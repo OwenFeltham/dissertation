@@ -1,33 +1,3 @@
-
-//         db                      88                                           88                            
-//        d88b                     ""                                    ,d     ""                            
-//       d8'`8b                                                          88                                   
-//      d8'  `8b      8b,dPPYba,   88  88,dPYba,,adPYba,   ,adPPYYba,  MM88MMM  88   ,adPPYba,   8b,dPPYba,   
-//     d8YaaaaY8b     88P'   `"8a  88  88P'   "88"    "8a  ""     `Y8    88     88  a8"     "8a  88P'   `"8a  
-//    d8""""""""8b    88       88  88  88      88      88  ,adPPPPP88    88     88  8b       d8  88       88  
-//   d8'        `8b   88       88  88  88      88      88  88,    ,88    88,    88  "8a,   ,a8"  88       88  
-//  d8'          `8b  88       88  88  88      88      88  `"8bbdP"Y8    "Y888  88   `"YbbdP"'   88       88  
-                                                                                                                                                                                                                           
-//       88888888888                                                      
-//       88                                                               
-//       88                                                               
-//       88aaaaa  8b,dPPYba,  ,adPPYYba,  88,dPYba,,adPYba,    ,adPPYba,  
-//       88"""""  88P'   "Y8  ""     `Y8  88P'   "88"    "8a  a8P_____88  
-//       88       88          ,adPPPPP88  88      88      88  8PP"""""""  
-//       88       88          88,    ,88  88      88      88  "8b,   ,aa  
-//       88       88          `"8bbdP"Y8  88      88      88   `"Ybbd8"'  
-                                                                                  
-//              88                                                 
-//              88                                                 
-//              88                                                 
-//              88           ,adPPYba,    ,adPPYba,   8b,dPPYba,   
-//              88          a8"     "8a  a8"     "8a  88P'    "8a  
-//              88          8b       d8  8b       d8  88       d8  
-//              88          "8a,   ,a8"  "8a,   ,a8"  88b,   ,a8"  
-//              88888888888  `"YbbdP"'    `"YbbdP"'   88`YbbdP"'   
-//                                                    88           
-//                                                    88           
-
 let rand1;
 let rand2;
 let rand3;
@@ -76,6 +46,11 @@ window.onload = function() {
 
   setInterval(function () {
 
+		var fallThrough = document.getElementById("rig").getAttribute('position');
+		if (fallThrough.y < -5) {
+			console.log(fallThrough.y);
+			document.getElementById('rig').setAttribute('position', { x: 0, y: 10.8, z: 0 });
+		}
 
     shootX = raycasterXYZ.x;
     shootY = raycasterXYZ.y;
