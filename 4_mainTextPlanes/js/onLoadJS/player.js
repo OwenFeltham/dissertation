@@ -27,35 +27,35 @@ function textWhite() {
   var input = document.getElementById("userInput").value;
   document.getElementById("whitePlane").setAttribute('text', { value: input,  });
   document.getElementById("whitePlane").setAttribute('text', { wrapCount: 140 });
-  document.getElementById("whitePlane").setAttribute('text', { side: 'double'   });  
+  document.getElementById("whitePlane").setAttribute('text', { side: 'double' });  
 }
 
 function textGreen() {
   var input = document.getElementById("userInput2").value;
   document.getElementById("greenPlane").setAttribute('text', { value: input,  });  
   document.getElementById("greenPlane").setAttribute('text', { wrapCount: 140 });
-  document.getElementById("greenPlane").setAttribute('text', { side: 'double'   });  
+  document.getElementById("greenPlane").setAttribute('text', { side: 'double' });  
 }
 
 function textPink() {
   var input = document.getElementById("userInput3").value;
-  document.getElementById("pinkPlane").setAttribute('text', { value: input   });
-  document.getElementById("pinkPlane").setAttribute('text', {wrapCount: 140  });
-  document.getElementById("pinkPlane").setAttribute('text', { side: 'double'   });    
+  document.getElementById("pinkPlane").setAttribute('text', { value: input    });
+  document.getElementById("pinkPlane").setAttribute('text', { wrapCount: 140  });
+  document.getElementById("pinkPlane").setAttribute('text', { side: 'double'  });    
 }
 
 function textYellow() {
   var input = document.getElementById("userInput4").value;
-  document.getElementById("yellowPlane").setAttribute('text', { value: input  });
-  document.getElementById("yellowPlane").setAttribute('text', {wrapCount: 140 });
-  document.getElementById("yellowPlane").setAttribute('text', { side: 'double'  });    
+  document.getElementById("yellowPlane").setAttribute('text', { value: input   });
+  document.getElementById("yellowPlane").setAttribute('text', { wrapCount: 140 });
+  document.getElementById("yellowPlane").setAttribute('text', { side: 'double  });    
 }
 
 function textBlue() {
   var input = document.getElementById("userInput5").value;
-  document.getElementById("bluePlane").setAttribute('text', { value: input   });
-  document.getElementById("bluePlane").setAttribute('text', {wrapCount: 140  });
-  document.getElementById("bluePlane").setAttribute('text', { side: 'double'   });    
+  document.getElementById("bluePlane").setAttribute('text', { value: input    });
+  document.getElementById("bluePlane").setAttribute('text', { wrapCount: 140  });
+  document.getElementById("bluePlane").setAttribute('text', { side: 'double'  });    
 }
 
 //___________________________________________________________T O G G L E   F L Y
@@ -193,8 +193,6 @@ function createGrid() {
 //_________________________________________________POINT TO OBJECT RAYCAST PLAYER POSITION!!!!!!!!!!!!!!
 function createPlayerLine() {
 	var pxy = document.getElementById("player").getAttribute('position', {});
-  var pxy = document.getElementById("player").getAttribute('position', {});
-  
   var sceneEl = document.querySelector('a-scene');
   var entityEl = document.createElement('a-entity');
 
@@ -202,17 +200,11 @@ function createPlayerLine() {
   var playerY = pxy.y - 5;
   var playerZ = pxy.z + 1;
 
-// console.log(hour);
-
   entityEl.setAttribute('line', {
     start: { x: playerX, y: playerY, z: playerZ},
     end: { x: shootX, y: shootY, z: shootZ },
     color: red
   });
-
-  // entityEl.setAttribute('end', { x: shootX, y: shootY, z: shootZ });
-  // entityEl.setAttribute('start', { x: playerX, y: playerY, z: playerZ});
-  // entityEl.setAttribute('color', {red});
 
   sceneEl.appendChild(entityEl);
 }
