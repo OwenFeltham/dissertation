@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Staircases and Collision</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" type="image/png" href="/favicon.png" />
+		<link href="https://fonts.googleapis.com/css?family=Atomic+Age|Cinzel|Coming+Soon|
+		Cormorant+SC|Cutive+Mono|Josefin+Sans:100|Julius+Sans+One|Mountains+of+Christmas|
+		Nixie+One|Nosifer|Playfair+Display+SC|Suez+One|Quicksand|Space+Mono|Rubik+Mono+One|Vast+Shadow"
+		 rel="stylesheet">
+		<!-- #region COMMUNITY SCRIPTS-->
+		<script src="/js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+		<script src="/js/aframeCommunity/aframe-text-geometry-component.min.js"></script>
+		<script src="/js/aframeCommunity/aframe-physics-system.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+		<script src="/js/bulma-slider.min.js"></script>
+		<script src="/js/movement-controls.js"></script>
+		<!--endregion-->
+		<!-- #region MY SCRIPTS -->
+		<script src="js/onLoadJS/onload.js"></script>
+		<script src="js/onLoadJS/player.js"></script>
+		<!-- endregion -->
+		<link rel="stylesheet" type="text/css" href="/css/bulma/bulma-slider-master/dist/css/bulma-slider.min.css">
+		<link rel="stylesheet" type="text/css" href="css/COLORgrid.css">
+	</head>
+
+	<body>
+		<!-- ______________________________________O N E -->
+		<div class="grid-container">
+			<!-- #region C A N V A S E S -->
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas2" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<!-- endregion -->
+			<!-- #region N A V B A R -->		
+			<a href="../index.html">
+				<div class="header">Javascript 3D Experiments</div>
+			</a>
+			<div class="nav">
+				<ul>
+					<a href="../index.html">
+						<li class="buttonS">Home</li>
+					</a>
+					<a href="StaircasesPly.html">
+						<li class="current">1. &nbspStaircases and Collision</li>
+					</a>
+					<a href="../6_light/Light.html">
+						<li class="buttonS">2.&nbsp Learn with Light</li>
+					</a>
+					<a href="../7_threeExperiment/threeJsExperiment.html">
+						<li class="buttonS">3. &nbspTHREE js experiment</li>
+					</a>
+					<a href="../1_panesConcept/panesConcept.html">
+						<li class="buttonS">4. &nbspPanes Concept</li>
+					</a>
+					<a href="../2_extrudedText/extrudedText.html">
+						<li class="buttonS">5. &nbspExtruded Text</li>
+					</a>
+					<a href="../3_experimentalHub/experimentalHub.html">
+						<li class="buttonS">6. &nbspExperimental Hub</li>
+					</a>
+					<a href="../4_mainTextPlanes/mainTextPlanes.html">
+						<li class="buttonS">7. &nbspMain Text Panes</li>
+					</a>
+				</ul>
+			</div>
+			<!-- endregion -->
+			<!-- #region P A N E   W O R L D   C O N T R O L  -->
+			<div class="ctrlWhite">
+				<p>Fly on or off</p>
+			</div>
+			<div class="ctrlGreen">
+				<p>Pointer lock</p>
+			</div>
+			<div class="ctrlPink">
+				<p>Reset player position</p>
+			</div>
+			<div class="ctrlYellow">
+				<p>Physics hitbox lines on</p>
+			</div>
+			<div class="ctrlBlue">
+				<p>Physics hitbox lines off</p>
+			</div>
+			<!-- endregion-->
+			<div class="VR">
+				<a-scene shadow="cast: false" antialias="true" embedded physics="debug: false" light="defaultLightsEnabled: false"
+				 stats-in-vr background="color: black">
+					<!-- #region A S S E T S      -->
+					<a-assets>
+						<a-asset-item id="pinkGreenOBJ" src="../assets/pinkGreen/pinkGreen.obj"></a-asset-item>
+						<a-asset-item id="pinkGreenMTL" src="../assets/pinkGreen/pinkGreen.mtl"></a-asset-item>
+						<a-asset-item id="dropOBJ" src="../assets/pinkGreen/drop.obj"></a-asset-item>
+						<a-asset-item id="dropMTL" src="../assets/pinkGreen/drop.mtl"></a-asset-item>
+					</a-assets>
+					<!-- endregion -->
+					<!-- #region P L A Y E R      -->
+						<a-box body="type: dynamic" wasd-controls>
+						<a-entity camera position="0 3 0" look-controls="pointerLockEnabled: true">
+						</a-box>
+					<!-- endregion -->
+					<!-- #region W O R L D        -->
+					<a-sky color="#da7c7c"></a-sky>
+					<a-plane visible="true" position="0 0 0 " rotation="-90 0 0" width="500" height="500" static-body color="#FFC65D"></a-plane>
+					<!-- endregion world -->
+					<!-- #region L I G H T S      -->
+					<a-light type="directional" position="100 100 100" rotation="-90 0 0" target="#directionaltarget">
+						<a-entity id="directionaltarget" position="0 0 -1"></a-entity>
+					</a-light>
+					<a-entity light="type: point; intensity: 3; distance: 50; decay: 2" position="5 18 -22"></a-entity>
+					<!--endregion-->
+					<!-- #region G E O M E T R Y  -->
+					<a-obj-model src="#pinkGreenOBJ" mtl="#pinkGreenMTL" body="type: static; shape: mesh;" rotation="0 0 0" position="10 0 -50"
+					 scale="0.4 0.2 0.4 "></a-obj-model>
+					<a-obj-model src="#dropOBJ" mtl="#dropMTL" body="type: static; shape: mesh;" rotation="0 0 0" position="10 16 -37"
+					 scale="0.4 0.4 0.4 "></a-obj-model>
+					<a-sphere position="5.48 10 -38" body="type: dynamic; shape: sphere;" radius="1.25" color="#EF2D5E"></a-sphere>
+					<a-sphere position="4.5 70 -49" body="type: dynamic; shape: sphere; mass: 0.1; linear-damping: 0; angularDamping: 0"
+					 radius="4" color="#EF2D5E"></a-sphere>
+					<a-sphere position="0 30 -17" body="type: dynamic; shape: sphere; mass: 2; linear-damping: 0; angularDamping: 0"
+					 radius="1.25" color="#EF2D5E"></a-sphere>
+					<!--endregion-->
+				</a-scene>
+			</div>
+			<!-- #region   B U T T O N S    (R I G H T   S I D E )    -->
+			<div class="rightSideButtons">
+				<div class="btn-group">
+				</div>
+			</div>
+			<!-- endregion -->
+			<!-- #region   B U T T O N S    (T E X T   P L A N E S )  -->
+			<div class="textSlider1">
+				<button class="buttonB button2" onclick="resetPlayer();">
+					<p class="updown">RESET PLAYER</p>
+				</button>
+			</div>
+			<div class="textSlider2">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider3">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<!-- endregion -->
+		</div>
+		<!-- ______________________________________T W O -->
+		<div class="grid-container2">
+			<!-- #region   P L A Y E R   C O N T R O L S             -->
+			<div class="fovText">
+				<p>FOV: <span id="fovState"></span>
+				</p>
+			</div>
+			<div class="movText">
+				<p>Movement speed: <span id="moveState"></span>
+			</div>
+			<div class="hudText">
+				<p id="hud">ON</p>
+			</div>
+			<div class="opaText">
+				<p>Hud opacity: <span id="hudState"></span>
+				</p>
+			</div>
+			<div class="fov">
+				<input type="range" min="1" max="120" value="90" class="slider" id="myRange">
+				<p>
+					<span id="fovState"></span>
+				</p>
+			</div>
+			<div class="mov">
+				<input type="range" min="1" max="5" value="1" class="slider" id="movSlider">
+				<p>
+					<span id="moveState"></span>
+			</div>
+			<div class="torch">
+				<button class="button button2" onclick="toggleTorch();">Toggle torch</button>
+				<p id="onOffTorch"></p>
+			</div>
+			<div class="hudOnOff">
+				<button class="button button2" onclick="hudOnOff();">HUD</button>
+				<p id="hud"></p>
+			</div>
+			<div class="hudOpa">
+				<input type="range" min="0" max="100" value="16" class="slider" id="hudSlider">
+				<p>
+					<span id="hudState"></span>
+				</p>
+				<input id="sliderWithValue" class="slider has-output is-fullwidth" min="0" max="100" value="50" step="1" type="range">
+			</div>
+			<!-- endregion -->
+		</div>
+	</body>
+
+</html>
