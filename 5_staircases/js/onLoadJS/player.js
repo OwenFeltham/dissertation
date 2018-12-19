@@ -4,6 +4,10 @@ var shootZ;
 
 let raycasterXYZ;
 
+function resetPlayer() {
+		document.getElementById('player').setAttribute('position', { x: 0, y: 10.8, z: 0 });
+ }
+
 function getPlayerXY() {
   var pxy = document.getElementById("player").getAttribute('position', {});   //      
   console.log(pxy);

@@ -45,16 +45,6 @@ window.onload = function () {
 			moveSpeed.innerHTML = movNums.value;
 		}
 
-		var refToDOMslider = document.getElementById("hudSlider");
-		let opaNo = refToDOMslider.value;
-		var opaFloat = opaNo / 200;
-		var opaLevel = document.getElementById("hudState");
-		opaLevel.innerHTML = refToDOMslider.value;
-		refToDOMslider.oninput = function () {
-			document.getElementById("curvedHUD").setAttribute('opacity', opaFloat);
-			opaLevel.innerHTML = opaFloat;
-		}
-
 	}, requestAnimationFrame);
 
 }
