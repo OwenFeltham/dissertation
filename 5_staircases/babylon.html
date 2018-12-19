@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Staircases and Collision</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" type="image/png" href="../favicon.png"/>
+		<link href="https://fonts.googleapis.com/css?family=Atomic+Age|Cinzel|Coming+Soon|
+		Cormorant+SC|Cutive+Mono|Josefin+Sans:100|Julius+Sans+One|Mountains+of+Christmas|
+		Nixie+One|Nosifer|Playfair+Display+SC|Suez+One|Quicksand|Space+Mono|Rubik+Mono+One|Vast+Shadow"
+		 rel="stylesheet">
+		<!-- #region COMMUNITY SCRIPTS-->
+		<script src="/js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+		<script src="/js/aframeCommunity/aframe-text-geometry-component.min.js"></script>
+		<script src="/js/aframeCommunity/aframe-physics-system.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+		<script src="/js/bulma-slider.min.js"></script>
+		<script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+		<script src="https://preview.babylonjs.com/ammo.js"></script>
+		<script src="https://preview.babylonjs.com/cannon.js"></script>
+		<script src="https://preview.babylonjs.com/Oimo.js"></script>
+
+		<script src="https://cdn.babylonjs.com/babylon.js"></script>
+		<script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+		<!--endregion-->
+		<!-- #region MY SCRIPTS -->
+		<!-- <script src="js/onLoadJS/onload.js"></script>
+		<script src="js/onLoadJS/player.js"></script> -->
+		<!-- endregion -->
+		<link rel="stylesheet" type="text/css" href="/css/bulma/bulma-slider-master/dist/css/bulma-slider.min.css">
+		<link rel="stylesheet" type="text/css" href="css/COLORgrid.css">
+		<link rel="stylesheet" type="text/css" href="css/babylon.css">
+	</head>
+
+	<body>
+		<!-- ______________________________________O N E -->
+		<div class="grid-container">
+			<!-- #region C A N V A S E S -->
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<div id="hideCanv" style="display: none">
+				<canvas id="myCanvas2" width="1024" height="512" style="border:1px solid #d3d3d3;"> Your browser does not support
+					the canvas element. </canvas>
+			</div>
+			<!-- endregion -->
+			<a href="../index.html"><div class="header">Javascript 3D Experiments</div></a>
+			<!-- #region N A V B A R -->
+			<div class="nav"><ul>
+				<a href="../index.html">
+					<li class="buttonS" >Home</li>
+				</a>
+				<a href="StaircasesPly.html">
+					<li class="current">1. &nbspStaircases and Collision</li>
+				</a>
+				<a href="../6_light/Light.html">
+					<li class="buttonS">2.&nbsp Learn with Light</li>
+				</a>
+				<a href="../7_threeExperiment/threeJsExperiment.html">
+					<li class="buttonS">3. &nbspTHREE js experiment</li>
+				</a>
+				<a href="../1_panesConcept/panesConcept.html">
+					<li class="buttonS">4. &nbspPanes Concept</li>
+				</a>
+				<a href="../2_extrudedText/extrudedText.html">
+					<li class="buttonS">5. &nbspExtruded Text</li>
+				</a>
+				<a href="../3_experimentalHub/experimentalHub.html">
+					<li class="buttonS">6. &nbspExperimental Hub</li>
+				</a>
+				<a href="../4_mainTextPlanes/mainTextPlanes.html">
+					<li class="buttonS">7. &nbspMain Text Panes</li>
+				</a>
+				</ul>
+			</div>
+			<!-- endregion -->
+			<!-- #region P A N E   W O R L D   C O N T R O L  -->
+			<div class="ctrlWhite">
+				<p>Fly on or off</p>
+			</div>
+			<div class="ctrlGreen">
+				<p>Pointer lock</p>
+			</div>
+			<div class="ctrlPink">
+				<p>Reset player position</p>
+			</div>
+			<div class="ctrlYellow">
+				<p>Physics hitbox lines on</p>
+			</div>
+			<div class="ctrlBlue">
+					<p>Physics hitbox lines off</p>
+			</div>
+			<!-- endregion-->
+			<div class="VR">
+
+				<canvas id="renderCanvas"></canvas>
+				<script>
+
+					var myObj;
+					var canvas = document.getElementById("renderCanvas");
+					var createScene = function () {
+						var scene = new BABYLON.Scene(engine);
+
+						BABYLON.SceneLoader.Append("../assets/maze/", "maze.obj", myObj, function (hmm) {
+						// do something with the scene
+						myObj.position.y = -50;
+						BABYLON.meshes[0].position.y = 90;
+						});
+
+						// Lights
+						var light0 = new BABYLON.DirectionalLight("Omni", new BABYLON.Vector3(-2, -5, 2), scene);
+						var light1 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(2, -5, -2), scene);
+		
+						// Need a free camera for collisions
+						var camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(0, -8, -20), scene);
+						camera.attachControl(canvas, true);
+						camera.inertia = 0;
+						camera.speed = 5;
+						camera.fov = 1;
+						camera.angularSensibility = 500;
+		
+						//Ground
+						var ground = BABYLON.Mesh.CreatePlane("ground", 200.0, scene);
+						ground.material = new BABYLON.StandardMaterial("groundMat", scene);
+						ground.material.diffuseColor = new BABYLON.Color3(1, 1, 1);
+						ground.material.backFaceCulling = false;
+						ground.position = new BABYLON.Vector3(5, -10, -15);
+						ground.rotation = new BABYLON.Vector3(Math.PI / 2, 0, 0);
+		
+						//Set gravity for the scene (G force like, on Y-axis)
+						scene.gravity = new BABYLON.Vector3(0, -0.9, 0);
+		
+						// Enable Collisions
+						scene.collisionsEnabled = true;
+		
+						//Then apply collisions and gravity to the active camera
+						camera.checkCollisions = true;
+						camera.applyGravity = true;
+		
+						//Set the ellipsoid around the camera (e.g. your player's size)
+						camera.ellipsoid = new BABYLON.Vector3(1, 1, 1);
+		
+						//finally, say which mesh will be collisionable
+						ground.checkCollisions = true;
+						// box.checkCollisions = true;
+		
+						return scene;
+					}
+		
+					var engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+					var scene = createScene();
+		
+					engine.runRenderLoop(function () {
+						if (scene) {
+							scene.render();
+						}
+					});
+		
+					// Resize
+					window.addEventListener("resize", function () {
+						engine.resize();
+					});
+				</script>
+
+			</div>
+			<!-- #region   B U T T O N S    (R I G H T   S I D E )    -->
+			<div class="rightSideButtons">
+				<div class="btn-group">
+				</div>
+			</div>
+			<!-- endregion -->
+			<!-- #region   B U T T O N S    (T E X T   P L A N E S )  -->
+			<div class="textSlider1">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider2">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<div class="textSlider3">
+				<button class="buttonB button2">
+					<p class="updown">MAKE LINE</p>
+				</button>
+			</div>
+			<!-- endregion -->
+		</div>
+		<!-- ______________________________________T W O -->
+		<div class="grid-container2">
+			<!-- #region   P L A Y E R   C O N T R O L S             -->
+			<div class="fovText">
+				<p>FOV: <span id="fovState"></span>
+				</p>
+			</div>
+			<div class="movText">
+				<p>Movement speed: <span id="moveState"></span>
+			</div>
+		
+			<div class="fov">
+				<input type="range" min="1" max="120" value="90" class="slider" id="myRange">
+				<p>
+					<span id="fovState"></span>
+				</p>
+			</div>
+			<div class="mov">
+				<input type="range" min="1" max="5" value="1" class="slider" id="movSlider">
+				<p>
+					<span id="moveState"></span>
+			</div>
+
+
+			<!-- endregion -->
+		</div>
+	</body>
+
+</html>
