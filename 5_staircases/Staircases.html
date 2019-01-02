@@ -89,7 +89,7 @@
 			</div>
 			<!-- endregion-->
 			<div class="VR">
-				<a-scene shadow="cast: false" antialias="true" embedded physics="debug: false" light="defaultLightsEnabled: false"
+				<a-scene shadow="cast: false" antialias="true" embedded physics="debug: false;" light="defaultLightsEnabled: false"
 				 stats-in-vr background="color: black">
 					<!-- #region A S S E T S      -->
 					<a-assets>
@@ -100,7 +100,7 @@
 					</a-assets>
 					<!-- endregion -->
 					<!-- #region P L A Y E R      -->
-					<a-entity id="player" movement-controls="speed: 0.3" kinematic-body position="0 0 0" jump-ability="maxJumps: 1; distance: 2">
+					<a-entity id="player" movement-controls="speed: 0.3" kinematic-body position="0 0 0" jump-ability="maxJumps: 1; distance: 4">
 						<a-entity camera position="0 2 0" look-controls="pointerLockEnabled: true"></a-entity>
 					</a-entity>
 					<!-- endregion -->

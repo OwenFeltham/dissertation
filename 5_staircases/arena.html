@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello, World! - A-Frame</title>
+		<meta name="description" content="Hello, World! - A-Frame">
+		<script src="/js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+		<script src="/js/aframeCommunity/aframe-physics-system.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+	</head>
+
+	<body>
+		<a-scene fog="type: linear; color: #AAA" physics="debug: false; friction: 0.01; gravity: -7; restitution: 0.5">
+			<!-- #region ASSETS -->
+			<assets>
+				<a-asset-item id="platOBJ" src="3dmodels/arena.obj"></a-asset-item>
+				<a-asset-item id="platMTL" src="3dmodels/noise.mtl"></a-asset-item>
+				<img id="my-image" src="126.png">
+				<img id="sky" src="pools.png">
+			</assets>
+			<!-- endregion -->
+			<!-- #region PLAYER -->
+			<a-entity id="rig" movement-controls="speed: 0.6" jump-ability="maxJumps: 122; distance: 7; height: 7 "
+			 kinematic-body position="0 0 0">
+				<a-entity camera position="0 5 0" look-controls>
+					<a-box position="1 0 -4" static-body scale="0.5 0.5 0.5"></a-box>
+				</a-entity>
+				<!-- <a-entity camera position="0 5 0" look-controls="pointerLockEnabled: true"></a-entity> -->
+			</a-entity>
+			<!-- endregion -->
+			<!-- #region OBJ files -->
+			<a-obj-model src="#platOBJ" material="color: red; roughness: 1" body="type: static; shape: mesh;" scale="10 10 10"
+			 rotation="0 0 0" position="0 -30 0"></a-obj-model>
+			<!-- endregion -->
+			<!-- #region INTERACTABLES -->
+			<a-sphere dynamic-body="sphereRadius:NaN" position="22 35 -24" radius="4" color="#EF2D5E"></a-sphere>
+			<!-- endregion -->
+			<!-- #region WORLD -->
+			<a-sky src="#sky"></a-sky>
+			<a-plane static-body position="0 0 -4" rotation="-90 0 0" width="200" height="200" color="#7BC8A4"></a-plane>
+			<!-- endregion -->
+			<!-- #region LIGHTS -->
+			<a-entity rotation="0 90 0">
+				<a-entity light="type: point; intensity: 1; distance: 100; decay: 5" position="0 10 10">
+					<a-box></a-box>
+				</a-entity>
+				<a-entity light="type: point; intensity: 1; distance: 100; decay: 5" position="30 10 10">
+					<a-box></a-box>
+				</a-entity>
+				<a-entity light="type: point; intensity: 1; distance: 100; decay: 5" position="60 10 10">
+					<a-box></a-box>
+				</a-entity>
+				<a-entity light="type: point; intensity: 1; distance: 100; decay: 5" position="0 90 10">
+					<a-box></a-box>
+				</a-entity>
+				<a-entity light="type: point; intensity: 1; distance: 100; decay: 5" position="30 90 10">
+					<a-box></a-box>
+				</a-entity>
+				<a-entity light="type: point; intensity: 1; distance: 100; decay: 5" position="60 90 10">
+					<a-box></a-box>
+				</a-entity>
+				<a-entity>
+					<!-- endregion --> `
+		</a-scene>
+	</body>
+
+</html>

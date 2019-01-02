@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello, World! - A-Frame</title>
+		<meta name="description" content="Hello, World! - A-Frame">
+		<script src="/js/aframeCommunity/aframe-v0.8.2.min.js"></script>
+		<script src="/js/aframeCommunity/aframe-physics-system.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+	</head>
+
+	<body>
+		<a-scene physics="debug: false; friction: 0.9; gravity: -9; restitution: 0">
+			<!-- #region ASSETS -->
+			<assets>
+				<a-asset-item id="platOBJ" src="3dmodels/plat.obj"></a-asset-item>
+				<a-asset-item id="platMTL" src="3dmodels/plat.mtl"></a-asset-item>
+
+				<a-asset-item id="noiseO" src="3dmodels/noise.obj"></a-asset-item>
+				<a-asset-item id="noiseM" src="3dmodels/noise.mtl"></a-asset-item>
+
+				<img id="my-image" src="126.png">
+				<img id="sky" src="bg2.png">
+			</assets>
+			<!-- endregion -->
+			<!-- #region PLAYER -->
+			<a-entity id="rig" movement-controls="speed: 0.6" jump-ability="maxJumps: 122; distance: 7; height: 7 "
+			 kinematic-body position="0 0 0">
+				<a-entity camera position="0 5 0" look-controls>
+					<!-- <a-entity light="type: spot; intensity: 0.75; distance: 50; decay: 2" position="0 0 0"></a-entity> -->
+				</a-entity>
+				<!-- <a-entity camera position="0 5 0" look-controls="pointerLockEnabled: true"></a-entity> -->
+			</a-entity>
+			<!-- endregion -->
+			<!-- #region OBJ files -->
+			<a-obj-model src="#platOBJ" mtl="#platMTL" scale="1 1 1" body="type: static; shape: mesh;" rotation="0 0 0" position="0 0 0"></a-obj-model>
+			<!-- endregion -->
+			<!-- #region ANIMATED PRIMITIVES -->
+			<a-box id="elevator" static-body="sphereRadius:NaN" position="-36 44 -19.5" color="#4CC3D9" scale="10 1 10">
+				<a-animation attribute="position" direction="alternate" dur="10000" from="-36 44 -19.5" to="-36 65 -19.5" repeat="indefinite"></a-animation>
+			</a-box>
+			<a-box id="wiper" static-body="sphereRadius:NaN" position="70 49 30" color="#4CC3D9" scale="1 10 10">
+				<a-animation attribute="position" direction="alternate" dur="10000" from="70 49 30" to="22 49 30" repeat="indefinite"></a-animation>
+			</a-box>
+			<a-box id="train" static-body="sphereRadius:NaN" position="50 83 0" color="#4CC3D9" scale="15 1 15">
+				<a-animation attribute="position" direction="alternate" dur="10000" from="50 83 0" to="75 83 0" repeat="indefinite"></a-animation>
+			</a-box>
+			<a-cylinder id="spinner" static-body position="14 85 -60" radius="9" height="0.512" color="#FFC65D">
+				<a-animation attribute="rotation" direction="alternate" dur="8000" from="0 0 0" to="110 0 0" repeat="indefinite"></a-animation>
+			</a-cylinder>
+			<a-cylinder id="spinner2" static-body position="-15 85 -60" radius="9" height="0.512" rotation="110 0 0" color="#FFC65D">
+				<a-animation attribute="rotation" direction="alternate" dur="10000" from="110 0 0" to="0 0 0" repeat="indefinite"></a-animation>
+			</a-cylinder>
+			<!-- endregion -->
+			<!-- #region INTERACTABLES -->
+			<a-sphere dynamic-body="sphereRadius:NaN" position="22 35 -18" radius="1.25" color="#EF2D5E"></a-sphere>
+		
+
+			<a-image src="#my-image" height="35" width="35" position="1.2 55 11">
+				<a-animation attribute="rotation" direction="alternate" dur="10000" from="0 0 0" to="0 360 0" repeat="indefinite"></a-animation>
+			</a-image>
+			<!-- endregion -->
+			<!-- #region WORLD -->
+			<a-plane static-body position="0 0 -4" rotation="-90 0 0" width="200" height="200" color="#7BC8A4"></a-plane>
+			<a-sky src="#sky"></a-sky>
+			<!-- endregion -->
+		</a-scene>
+	</body>
+
+</html>

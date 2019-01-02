@@ -41,7 +41,7 @@ window.onload = function () {
 		moveSpeed.innerHTML = movNums.value;
 		movNums.oninput = function () {
 			movNums.setAttribute('value', { movNumVal });
-			document.getElementById("rig").setAttribute('movement-controls', { speed: movNumVal });   //    GOOD
+			document.getElementById("player").setAttribute('movement-controls', { speed: movNumVal });   //    GOOD
 			moveSpeed.innerHTML = movNums.value;
 		}
 

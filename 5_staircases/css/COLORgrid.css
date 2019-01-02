@@ -330,3 +330,19 @@ li {
 a {
 	text-decoration: none;
 }
+
+li.sub {
+	background-color: #ddd;
+	border: none;
+	color: black;
+	margin: 4px 0 4px 40px;
+  font-size: 15px;
+	cursor: pointer;
+	border-radius: 8px;
+	padding: 5px;
+}
+
+li.sub:hover {
+	background-color: #f1f1f1;
+	font-size:20px;
+}
