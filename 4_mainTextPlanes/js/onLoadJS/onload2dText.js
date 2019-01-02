@@ -2,9 +2,9 @@ var shootX;
 var shootY;
 var shootZ;
 
-var playerX
-var playerY
-var playerZ
+var playerX;
+var playerY;
+var playerZ;
 
 window.onload = function () {
 	document.getElementById("scene").addEventListener("click", function sceneClick(event) {
@@ -47,13 +47,13 @@ window.onload = function () {
 		slider.oninput = function () {
 			document.getElementById("player").setAttribute('camera', { fov: output });   //    GOOD
 			view.innerHTML = slider.value;
-		}
+		};
 
 		var nums = document.getElementById("myNumber");
 		var numVal = nums.value;
 		nums.oninput = function () {
 			document.getElementById("player").setAttribute('camera', { zoom: numVal });   //    GOOD
-		}
+		};
 
 		var movNums = document.getElementById("movSlider");
 		var movNumVal = movNums.value;
@@ -62,7 +62,7 @@ window.onload = function () {
 		movNums.oninput = function () {
 			document.getElementById("player").setAttribute('wasd-controls', { acceleration: movNumVal });   //    GOOD
 			moveSpeed.innerHTML = movNums.value;
-		}
+		};
 
 		var refToDOMslider = document.getElementById("hudSlider");
 		let opaNo = refToDOMslider.value;
@@ -72,7 +72,7 @@ window.onload = function () {
 		refToDOMslider.oninput = function () {
 			document.getElementById("curvedHUD").setAttribute('opacity', opaFloat);
 			opaLevel.innerHTML = opaFloat;
-		}
+		};
 
 		// #endregion
 
@@ -85,7 +85,7 @@ window.onload = function () {
 			var normalY = planeXYZ.y;
 			var normalZ = planeXYZ.z;
 			document.getElementById('greenX').setAttribute('position', { x: userSlide, y: normalY, z: normalZ });
-		}
+		};
 
 		var ctrlNEWY = document.getElementById("ctrlWSliderY");
 		var userSlideY = ctrlNEWY.value;
@@ -94,7 +94,7 @@ window.onload = function () {
 			var normalX = planeXYZ.x;
 			var normalZ = planeXYZ.z;
 			document.getElementById('greenX').setAttribute('position', { x: normalX, y: userSlideY, z: normalZ });
-		}
+		};
 
 		var ctrlNEWZ = document.getElementById("ctrlWSliderZ");
 		var minusPlaneZ = ctrlNEWZ.value;
@@ -104,13 +104,13 @@ window.onload = function () {
 			var normalY = planeXYZ.y;
 			var normalX = planeXYZ.x;
 			document.getElementById('greenX').setAttribute('position', { x: normalX, y: normalY, z: userSlideZ });
-		}
+		};
 
 		var ctrlNEWScale = document.getElementById("ctrlWSliderScale");
 		var userSlideScale = ctrlNEWScale.value;
 		ctrlNEWScale.oninput = function () {
 			document.getElementById('greenX').setAttribute('scale', { x: userSlideScale, y: userSlideScale, z: userSlideScale });
-		}
+		};
 
 		//________________________________________________________________ W h i t e
 		var ctrlNEWWhite = document.getElementById("ctrlWSliderWhite");
@@ -121,7 +121,7 @@ window.onload = function () {
 			var normalY = planeXYZ.y;
 			var normalZ = planeXYZ.z;
 			document.getElementById('whiteX').setAttribute('position', { x: userSlideWhite, y: normalY, z: normalZ });
-		}
+		};
 
 		var ctrlNEWYWhite = document.getElementById("ctrlWSliderYWhite");
 		var userSlideYWhite = ctrlNEWYWhite.value;
@@ -130,7 +130,7 @@ window.onload = function () {
 			var normalX = planeXYZ.x;
 			var normalZ = planeXYZ.z;
 			document.getElementById('whiteX').setAttribute('position', { x: normalX, y: userSlideYWhite, z: normalZ });
-		}
+		};
 
 		var ctrlNEWZWhite = document.getElementById("ctrlWSliderZWhite");
 		var minusPlaneZWhite = ctrlNEWZWhite.value;
@@ -140,13 +140,13 @@ window.onload = function () {
 			var normalY = planeXYZ.y;
 			var normalX = planeXYZ.x;
 			document.getElementById('whiteX').setAttribute('position', { x: normalX, y: normalY, z: userSlideZWhite });
-		}
+		};
 
 		var ctrlNEWScaleWhite = document.getElementById("ctrlWSliderScaleWhite");
 		var userSlideScaleWhite = ctrlNEWScaleWhite.value;
 		ctrlNEWScaleWhite.oninput = function () {
 			document.getElementById('whiteX').setAttribute('scale', { x: userSlideScaleWhite, y: userSlideScaleWhite, z: userSlideScaleWhite });
-		}
+		};
 
 		//______________________________________________________________________ P i n k
 		var ctrlNEWPink = document.getElementById("ctrlWSliderPink");
@@ -157,7 +157,7 @@ window.onload = function () {
 			var normalY = planeXYZ.y;
 			var normalZ = planeXYZ.z;
 			document.getElementById('PinkX').setAttribute('position', { x: userSlidePink, y: normalY, z: normalZ });
-		}
+		};
 
 		var ctrlNEWYPink = document.getElementById("ctrlWSliderYPink");
 		var userSlideYPink = ctrlNEWYPink.value;
@@ -166,7 +166,7 @@ window.onload = function () {
 			var normalX = planeXYZ.x;
 			var normalZ = planeXYZ.z;
 			document.getElementById('PinkX').setAttribute('position', { x: normalX, y: userSlideYPink, z: normalZ });
-		}
+		};
 
 		var ctrlNEWZPink = document.getElementById("ctrlWSliderZPink");
 		var minusPlaneZPink = ctrlNEWZPink.value;
@@ -176,13 +176,13 @@ window.onload = function () {
 			var normalY = planeXYZ.y;
 			var normalX = planeXYZ.x;
 			document.getElementById('PinkX').setAttribute('position', { x: normalX, y: normalY, z: userSlideZPink });
-		}
+		};
 
 		var ctrlNEWScalePink = document.getElementById("ctrlWSliderScalePink");
 		var userSlideScalePink = ctrlNEWScalePink.value;
 		ctrlNEWScalePink.oninput = function () {
 			document.getElementById('PinkX').setAttribute('scale', { x: userSlideScalePink, y: userSlideScalePink, z: userSlideScalePink });
-		}
+		};
 
 		//______________________________________________________________________ P i n k
 		var ctrlNEWBlue = document.getElementById("ctrlWSliderBlue");
